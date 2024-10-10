@@ -83,7 +83,7 @@ class User extends Authenticatable
         return $this->hasMany(CreditCard::class);
     }
 
-    //prueba commit 2
+    //prueba commit 3
     
 
 }
