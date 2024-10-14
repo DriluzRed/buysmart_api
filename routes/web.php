@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\HomeController as HomeFrontController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 //admin routes
 Route::prefix('admin')->group(function () {
     // Ruta para el dashboard de administración
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
 
     // Rutas para la gestión de categorías
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.index');

@@ -12,7 +12,14 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $search = request()->query('search');
+        if ($search) {
+            $brands = Brand::where('name', 'LIKE', "%{$search}%")->paginate(20);
+        } else {
+            $brands = Brand::paginate(20);
+        }
+
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -20,7 +27,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::all();
     }
 
     /**
@@ -28,7 +35,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
