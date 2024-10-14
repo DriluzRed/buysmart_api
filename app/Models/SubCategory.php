@@ -25,4 +25,6 @@ class SubCategory extends Model
     }
 
     
+
+    
 }
