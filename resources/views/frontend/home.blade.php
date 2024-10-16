@@ -15,8 +15,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $offer->name }}</h5>
                             <p class="card-text">{{ $offer->description }}</p>
-                            <p><strong>Precio en oferta: ${{ $offer->sale_price }}</strong></p>
-                            <p><small>Precio normal: <del>${{ $offer->regular_price }}</del></small></p>
+                            <p><strong>Precio en oferta: ${{ \App\Helpers\Helper::formatPrice($offer->sale_price) }}</strong></p>
+                            <p><small>Precio normal: <del>${{ \App\Helpers\Helper::formatPrice($offer->price) }}</del></small></p>
                             <a href="{{ route('products.show', $offer->slug) }}" class="btn btn-primary">Ver producto</a>
                         </div>
                     </div>

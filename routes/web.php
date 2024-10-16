@@ -47,6 +47,7 @@ Route::get('/terms', [App\Http\Controllers\InfoController::class, 'terms'])->nam
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{slug}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::get('/offers', [App\Http\Controllers\ProductController::class, 'offers'])->name('products.offers');
+Route::get('/search', [App\Http\Controllers\ProductController::class, 'searchProducts'])->name('products.search');
 
 
 //categories routes

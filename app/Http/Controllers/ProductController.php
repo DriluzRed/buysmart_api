@@ -62,4 +62,14 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function searchProducts(Request $request)
+    {
+        $query = '';
+        if ($request->has('q')) {
+            $query = $request->q;
+        }
+        $products = Product::where('name', 'like', "%$query%")->get();
+        return view('components.search-products', compact('products'));
+    }
 }

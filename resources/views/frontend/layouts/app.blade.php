@@ -11,6 +11,7 @@
 
     <!-- Estilos personalizados -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     @section('styles')
 
     @endsection
@@ -21,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Mi E-commerce') }}
+                <i class="fas fa-store"></i> {{ config('app.name', 'Mi E-commerce') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -30,21 +31,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">Inicio</a>
+                        <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorías
+                            <i class="fas fa-th-list"></i> Categorías
                         </a>
+
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{route('products.index')}}"><i class="fas fa-boxes"></i> Todos los productos</a>
+                            <hr>
                             @foreach($categories as $category)
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">{{ $category->name }}</a>
+                                    <a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}"><i class="fas fa-tag"></i> {{ $category->name }}</a>
                                     @if($category->subcategories->isNotEmpty())
                                         <ul class="dropdown-menu">
                                             @foreach($category->subcategories as $subcategory)
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ route('subcategories.show', $subcategory->slug) }}">{{ $subcategory->name }}</a>
+                                                    <a class="dropdown-item" href="{{ route('subcategories.show', $subcategory->slug) }}"><i class="fas fa-tags"></i> {{ $subcategory->name }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -54,10 +58,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.offers') }}">Ofertas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact.index') }}">Contacto</a>
+                        <form class="d-flex position-relative" action="" method="GET" id="search-form">
+                            <input type="text" name="q" class="form-control me-2" placeholder="Buscar..." id="search-input" autocomplete="off">
+                            <button class="btn btn-outline-success" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <div class="dropdown-menu" id="search-results" style="display: none; position: absolute; top: 100%; left: 0; width: 100%;"></div>
+                        </form>
                     </li>
                 </ul>
 
@@ -65,7 +72,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('cart.index') }}">
-                            {{-- <i class="bi bi-cart"></i> Carrito ({{ Cart::count() }}) --}}
+                            <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                     </li>
                     <!-- Authentication Links -->
@@ -75,17 +82,15 @@
                                 <a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a>
                             </li>
                         @endif
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
-                            </li>
-                        @endif
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @if(Auth::user())
+                                    <a class="nav-link" href="{{ route('admin.home') }}">Panel de administración</a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
@@ -109,8 +114,27 @@
 
     <!-- Footer -->
     <footer class="bg-light py-4 mt-auto">
-        <div class="container text-center">
-            <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Mi E-commerce') }}. Todos los derechos reservados.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-left">
+                    <h5>{{ config('app.name', 'Mi E-commerce') }}</h5>
+                    <p>© {{ date('Y') }}. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5>Enlaces útiles</h5>
+                    <ul class="list-unstyled">
+                        {{-- <li><a href="{{ route('info.security-policy') }}">Política de Privacidad</a></li>
+                        <li><a href="{{ route('info.service-terms') }}">Términos de Servicio</a></li>
+                        <li><a href="{{ route('info.contact') }}">Contacto</a></li> --}}
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center text-md-right">
+                    <h5>Síguenos</h5>
+                    <a href="https://www.facebook.com" class="text-dark mr-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.twitter.com" class="text-dark mr-2"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -119,21 +143,39 @@
 
     <!-- Scripts personalizados -->
     <script src="{{ asset('js/app.js') }}"></script>
-    @section('scripts')
-        <script>
-            $(document).ready(function() {
-                $('.dropdown-submenu a.dropdown-item').on("click", function(e) {
-                    var submenu = $(this).next('.dropdown-menu');
-                    if(submenu.is(':visible')) {
-                        submenu.hide();
-                    } else {
-                        submenu.show();
-                    }
-                    e.stopPropagation();
-                    e.preventDefault();
-                });
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-submenu a.dropdown-item').on("click", function(e) {
+                var submenu = $(this).next('.dropdown-menu');
+                if(submenu.is(':visible')) {
+                    submenu.hide();
+                } else {
+                    submenu.show();
+                }
+                e.stopPropagation();
+                e.preventDefault();
             });
-        </script>
+            $('#search-input').on('keyup', function() {
+                var query = $(this).val();
+                if(query.length > 2) {
+                    $.ajax({
+                        url: '{{ route('products.search') }}',
+                        method: 'GET',
+                        data: { q: query },
+                        success: function(data) {
+                            $('#search-results').html(data);
+                            $('#search-results').show();
+                        }
+                    });
+                } else {
+                    $('#search-results').hide();
+                }
+            });
+        });
+    </script>
+    @section('scripts')
+
     @endsection
 
 </body>
