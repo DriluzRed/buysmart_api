@@ -28,7 +28,7 @@ class NeighborhoodCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Neighborhood::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/neighborhood');
-        CRUD::setEntityNameStrings('neighborhood', 'neighborhoods');
+        CRUD::setEntityNameStrings('Barrio', 'Barrios');
     }
 
     /**
@@ -39,7 +39,16 @@ class NeighborhoodCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::addColumn([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre'
+        ]);
+        CRUD::addColumn([
+            'name' => 'city.name',
+            'type' => 'text',
+            'label' => 'Ciudad'
+        ]);
 
         /**
          * Columns can be defined using the fluent syntax:
@@ -56,7 +65,19 @@ class NeighborhoodCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(NeighborhoodRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre'
+        ]);
+        CRUD::addField([
+            'name' => 'city_id',
+            'type' => 'select',
+            'label' => 'Ciudad',
+            'entity' => 'city',
+            'attribute' => 'name',
+            'model' => \App\Models\City::class
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax:
