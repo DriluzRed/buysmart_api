@@ -7,26 +7,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\HomeController as HomeFrontController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 //admin routes
-Route::prefix('admin')->group(function () {
-    // Ruta para el dashboard de administración
-    Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
-
-    // Rutas para la gestión de categorías
-    Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
-    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
-
-    // Rutas para la gestión de productos
-    Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('admin.products.store');
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
-    Route::put('/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
-});
 
 
 

@@ -19,3 +19,12 @@
     background-color: #f8f9fa; 
     color: #343a40; 
 }
+
+@media (max-width: 768px) {
+    .dropdown-submenu > .dropdown-menu {
+        display: none;
+    }
+    .dropdown-submenu.open > .dropdown-menu {
+        display: block;
+    }
+}

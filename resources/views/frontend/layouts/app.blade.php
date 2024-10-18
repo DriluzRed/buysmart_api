@@ -13,7 +13,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     @section('styles')
-
+        
     @endsection
 </head>
 <body>
@@ -88,9 +88,6 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @if(Auth::user())
-                                    <a class="nav-link" href="{{ route('admin.home') }}">Panel de administración</a>
-                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
@@ -139,23 +136,15 @@
     </footer>
 
     <!-- Bootstrap JS and dependencies (Popper.js and jQuery if needed) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Scripts personalizados -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.dropdown-submenu a.dropdown-item').on("click", function(e) {
-                var submenu = $(this).next('.dropdown-menu');
-                if(submenu.is(':visible')) {
-                    submenu.hide();
-                } else {
-                    submenu.show();
-                }
-                e.stopPropagation();
-                e.preventDefault();
-            });
+
             $('#search-input').on('keyup', function() {
                 var query = $(this).val();
                 if(query.length > 2) {
