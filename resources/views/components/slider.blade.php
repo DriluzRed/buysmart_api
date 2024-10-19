@@ -3,7 +3,7 @@
         @foreach ($sliders as $index => $slider)
             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                 <a href="{{ $slider->slug }}">
-                    <img src="{{ asset($slider->banner_image) }}" class="d-block w-100" alt="Slider Image">
+                    <img src="{{ asset($slider->banner_image) }}" class="d-block w-100" alt="Slider Image"  width="1200px" height="500px">
                 </a>
             </div>
         @endforeach

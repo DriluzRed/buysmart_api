@@ -10,7 +10,7 @@ class CreditCard extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'card_token',
         'last_four',
         'brand',
@@ -21,9 +21,9 @@ class CreditCard extends Model
         'is_active',
     ];
 
-    public function user()
+    public function customer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Customer::class);
     }
 
 
