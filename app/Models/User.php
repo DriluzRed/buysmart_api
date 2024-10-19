@@ -24,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
         'ci',
         'phone',
@@ -51,6 +52,23 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param  array  $attributes
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // Set default values
+        $this->attributes['role'] = $this->attributes['role'] ?? 'customer';
+        $this->attributes['ci'] = $this->attributes['ci'] ?? '11111111';
+        $this->attributes['phone'] = $this->attributes['phone'] ?? '1111111111';
+        $this->attributes['birthdate'] = $this->attributes['birthdate'] ?? '2000-01-01';
     }
 
     //relations 

@@ -7,7 +7,9 @@
     "require": {
         "php": "^8.2",
         "backpack/crud": "^6.7",
+        "backpack/pagemanager": "^3.3",
         "backpack/permissionmanager": "^7.2",
+        "backpack/settings": "^3.1",
         "backpack/theme-tabler": "^1.2",
         "jeroennoten/laravel-adminlte": "^3.14",
         "laravel/framework": "^11.9",
@@ -53,7 +55,8 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
-        ]
+        ],
+        "post-install-cmd": ["@php artisan storage:link --quiet"]
     },
     "extra": {
         "laravel": {

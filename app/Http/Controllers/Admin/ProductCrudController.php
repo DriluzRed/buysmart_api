@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\ProductImage;
 
 /**
  * Class ProductCrudController
@@ -28,7 +29,7 @@ class ProductCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Product::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
-        CRUD::setEntityNameStrings('product', 'products');
+        CRUD::setEntityNameStrings('producto', 'productos');
     }
 
     /**
@@ -39,12 +40,79 @@ class ProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+       CRUD::addColumns(
+        [
+            [
+                'name' => 'name',
+                'type' => 'text',
+                'label' => 'Nombre',
+            ],
+            [
+                'name' => 'description',
+                'type' => 'text',
+                'label' => 'Descripción',
+            ],
+            [
+                'name' => 'slug',
+                'type' => 'text',
+                'label' => 'Slug',
+            ],
+            [
+                'name' => 'category_id',
+                'type' => 'select',
+                'label' => 'Categoria',
+                'entity' => 'category',
+                'attribute' => 'name',
+                'model' => \App\Models\Category::class,
+            ],
+            [
+                'name' => 'sub_category_id',
+                'type' => 'select',
+                'label' => 'Sub Categoria',
+                'entity' => 'subCategory',
+                'attribute' => 'name',
+                'model' => \App\Models\SubCategory::class,
+            ],
+            [
+                'name' => 'brand_id',
+                'type' => 'select',
+                'label' => 'Marca',
+                'entity' => 'brand',
+                'attribute' => 'name',
+                'model' => \App\Models\Brand::class,
+            ],
+            [
+                'name' => 'brand_id',
+                'type' => 'select',
+                'label' => 'Marca',
+                'entity' => 'brand',
+                'attribute' => 'name',
+                'model' => \App\Models\Brand::class,
+            ],
+            [
+                'name' => 'price',
+                'type' => 'number',
+                'label' => 'Precio',
+            ],
+            [
+                'name' => 'is_on_sale',
+                'type' => 'boolean',
+                'label' => 'En oferta',
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+            ],
+            [
+                'name' => 'sale_price',
+                'type' => 'number',
+                'label' => 'Precio de oferta',
+
+            ],
+            [
+                'name' => 'is_featured',
+                'type' => 'boolean',
+                'label' => 'Se muestra en la página principal',
+            ],
+        ]
+        );
     }
 
     /**
@@ -55,13 +123,97 @@ class ProductCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ProductRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        CRUD::addFields(
+            [
+                [
+                    'name' => 'name',
+                    'type' => 'text',
+                    'label' => 'Nombre',
+                ],
+                [
+                    'name' => 'description',
+                    'type' => 'textarea',
+                    'label' => 'Descripción',
+                ],
+                [
+                    'name' => 'slug',
+                    'type' => 'text',
+                    'label' => 'Slug',
+                ],
+                [
+                    'name' => 'main_image',
+                    'type' => 'upload',
+                    'label' => 'Imagen principal (tamaño 800x800)',
+                ],
+                [
+                    'name' => 'category_id',
+                    'type' => 'select',
+                    'label' => 'Categoria',
+                    'entity' => 'category',
+                    'attribute' => 'name',
+                    'model' => \App\Models\Category::class,
+                ],
+                [
+                    'name' => 'sub_category_id',
+                    'type' => 'select',
+                    'label' => 'Sub Categoria',
+                    'entity' => 'subcategory',
+                    'attribute' => 'name',
+                    'model' => \App\Models\SubCategory::class,
+                ],
+                [
+                    'name' => 'brand_id',
+                    'type' => 'select',
+                    'label' => 'Marca',
+                    'entity' => 'brand',
+                    'attribute' => 'name',
+                    'model' => \App\Models\Brand::class,
+                ],
+                [
+                    'name' => 'price',
+                    'type' => 'number',
+                    'label' => 'Precio',
+                ],
+                [
+                    'name' => 'is_on_sale',
+                    'type' => 'boolean',
+                    'label' => 'En oferta',
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+                ],
+                [
+                    'name' => 'sale_price',
+                    'type' => 'number',
+                    'label' => 'Precio de oferta',
+
+                ],
+                [
+                    'name' => 'is_featured',
+                    'type' => 'boolean',
+                    'label' => 'Se muestra en la página principal',
+                ],
+                [
+                    'name' => 'is_new',
+                    'type' => 'boolean',
+                    'label' => 'Es nuevo',
+                ],
+                [
+                    'name' => 'is_bestseller',
+                    'type' => 'boolean',
+                    'label' => 'Es el más vendido',
+                ],
+                [
+                    'name' => 'on_slider',
+                    'type' => 'boolean',
+                    'label' => 'En el slider',
+                ],
+                [
+                    'name' => 'banner_image',
+                    'type' => 'upload',
+                    'label' => 'Imagen del banner (tamaño 1920x500)',
+                ],
+            ]
+        );
+        CRUD::field('additional_images')->type('upload_multiple')->label('Imágenes del producto')->upload(true);
     }
 
     /**
@@ -74,4 +226,6 @@ class ProductCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    
 }

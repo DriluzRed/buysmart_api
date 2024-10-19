@@ -47,8 +47,14 @@ class HomeController extends Controller
             ->where('is_featured', true)
             ->where('on_slider', true)
             ->get();
+
+        $products = Product::where('is_featured', true)
+            ->with('brand', 'category', 'subcategory')
+            ->get();
+
         return view('frontend.home')
         ->with('offers', $offers)
-        ->with('products_banners', $products_banners);
+        ->with('products_banners', $products_banners)
+        ->with('products', $products);
     }
 }

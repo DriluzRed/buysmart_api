@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->foreignId('address_id')->constrained()->description('Address for billing');
             $table->string('invoice_number');
             $table->decimal('total', 10, 2);

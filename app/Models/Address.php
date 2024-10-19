@@ -10,7 +10,7 @@ class Address extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'neighborhood_id',
         'city_id',
         'department_id',
@@ -21,9 +21,9 @@ class Address extends Model
         'for_billing',
     ];
 
-    public function user()
+    public function customer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Customer::class);
     }
 
     public function neighborhood()

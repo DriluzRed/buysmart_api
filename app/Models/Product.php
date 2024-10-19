@@ -16,7 +16,7 @@ class Product extends Model
         'description',
         'price',
         'category_id',
-        'subcategory_id',
+        'sub_category_id',
         'brand_id',
         'main_image',
         'is_on_sale',
@@ -49,6 +49,10 @@ class Product extends Model
         return $this->belongsTo(Subcategory::class);
     }
 
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }
     
     
 }
