@@ -42,8 +42,12 @@ Route::get('/subcategories/{slug}', [App\Http\Controllers\SubcategoryController:
 
 
 //cart routes
-Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
-Route::post('/cart', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
-Route::delete('/cart/{rowId}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
-Route::patch('/cart/{rowId}', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'getCart']);
+Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'addToCart']);
+Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'removeFromCart']);
+
+//checkout routes
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
+
+
 

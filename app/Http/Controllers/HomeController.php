@@ -27,16 +27,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 10);
-
-        // Obtener ofertas con paginación
         $offers = Product::where('is_on_sale', true)
             ->with('brand', 'category', 'subcategory')
             ->where('sale_start', '<=', now())
             ->where('sale_end', '>=', now())
             ->where('sale_price', '!=', null)
             ->where('is_featured', true)
-            ->paginate($perPage);
+            ->paginate(20);
 
         // Obtener productos para banners
         $products_banners = Product::where('is_on_sale', true)

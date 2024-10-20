@@ -71,9 +71,10 @@
                 <!-- Carrito de compras y sesión del usuario -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cart.index') }}">
+                        <button class="btn" onclick="openCart()">
                             <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
+                            <span id="cart-count" class="badge bg-secondary">0</span>
+                        </button>
                     </li>
                     <!-- Authentication Links -->
                     @guest
@@ -135,6 +136,27 @@
         </div>
     </footer>
 
+    <!-- Modal del carrito -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Carrito de Compras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="cart-items" class="list-group">
+                        <!-- Los elementos del carrito se agregarán aquí dinámicamente -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="{{ route('checkout') }}" class="btn btn-primary">Proceder al pago</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS and dependencies (Popper.js and jQuery if needed) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -161,7 +183,53 @@
                     $('#search-results').hide();
                 }
             });
+            $('.add-to-cart').on('click', function() {
+                var itemId = $(this).data('item-id');
+                var itemName = $(this).data('item-name');
+                var itemPrice = $(this).data('item-price');
+
+                var item = { id: itemId, name: itemName, price: itemPrice };
+
+                $.ajax({
+                    url: '/cart/add',
+                    method: 'POST',
+                    data: {
+                        item: item,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            updateCartCount();
+                        }
+                    }
+                });
+            });
         });
+        function updateCartCount() {
+            $.ajax({
+                url: '/cart',
+                method: 'GET',
+                success: function(data) {
+                    $('#cart-count').text(data.length);
+                }
+            });
+        }
+        window.openCart = function() {
+            $.ajax({
+                url: '/cart',
+                method: 'GET',
+                success: function(data) {
+                    var cartItems = $('#cart-items');
+                    cartItems.empty();
+                    data.forEach(function(item) {
+                        cartItems.append('<li class="list-group-item">' + item.name + ' - $' + item.price + '</li>');
+                    });
+                    $('#cartModal').modal('show');
+                }
+            });
+        }
+        updateCartCount();
+        
     </script>
     @section('scripts')
 

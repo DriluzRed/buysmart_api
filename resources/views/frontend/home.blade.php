@@ -9,18 +9,7 @@
     <div class="row">
         @if($offers->isNotEmpty())
             @foreach($offers as $offer)
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{ $offer->main_image }}" class="card-img-top" alt="{{ $offer->name }} ">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $offer->name }}</h5>
-                            <p class="card-text">{{ $offer->description }}</p>
-                            <p><strong>Precio en oferta: {{ \App\Helpers\Helper::formatPrice($offer->sale_price) }}</strong></p>
-                            <p><small>Precio normal: {{ \App\Helpers\Helper::formatPrice($offer->price) }}</></small></p>
-                            <a href="{{ route('products.show', $offer->slug) }}" class="btn btn-primary">Ver producto</a>
-                        </div>
-                    </div>
-                </div>
+                @include('components.product-offer-card', ['product' => $offer])
             @endforeach
         @else
             <p class="text-center">No hay ofertas disponibles en este momento.</p>
