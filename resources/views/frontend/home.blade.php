@@ -8,37 +8,31 @@
     <h2 class="text-center">Ofertas destacadas</h2>
     <div class="row">
         @if($offers->isNotEmpty())
+        <div class="row">
             @foreach($offers as $offer)
                 @include('components.product-offer-card', ['product' => $offer])
             @endforeach
+        </div>
+
         @else
             <p class="text-center">No hay ofertas disponibles en este momento.</p>
         @endif
     </div>
-    <h2 class="text-center">Nuestros Productos</h2>
+    <h2 class="text-center">Nuevos Productos</h2>
     <div class="row">
         @if($products->isNotEmpty())
+        <div class="row">
             @foreach($products as $product)
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{ $product->main_image }}" class="card-img-top" alt="{{ $product->name }}">
-                        <div class="card-body">
-                            <h5 class="card-title
-                            ">{{ $product->name }}</h5>
-                            <p class="card-text">{{ $product->description }}</p>
-                            <p><strong>Precio: {{ \App\Helpers\Helper::formatPrice($product->price) }}</strong></p>
-                            <a href="{{ route('products.show', $product->slug) }}" class="btn btn-primary">Ver producto</a>
-                        </div>
-                    </div>
-                </div>
+                @include('components.product-card', ['product' => $product])
             @endforeach
+        </div>
         @else
             <p class="text-center">No hay productos disponibles en este momento.</p>
         @endif
     </div>
     <!-- Paginación -->
     <div class="d-flex justify-content-center">
-        <a href="{{route('products.index')}}"> Ver mas</a>
+        <a href="{{route('products.index')}}" class="btn btn-warning text-white">Ver todos los productos</a>
     </div>
 </div>
 

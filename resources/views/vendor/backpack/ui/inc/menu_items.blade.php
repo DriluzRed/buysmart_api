@@ -13,7 +13,7 @@
     <x-backpack::menu-dropdown-item title="Departmentos" icon="la la-question" :link="backpack_url('department')" />
     <x-backpack::menu-dropdown-item title="Ciudades" icon="la la-question" :link="backpack_url('city')" />
     <x-backpack::menu-dropdown-item title="Barrios" icon="la la-question" :link="backpack_url('neighborhood')" />
-    <x-backpack::menu-dropdown-item title='Paginas' icon='la la-file-o' :link="backpack_url('page')"/>
+    {{-- <x-backpack::menu-dropdown-item title='Paginas' icon='la la-file-o' :link="backpack_url('page')"/> --}}
 </x-backpack::menu-dropdown>
     <x-backpack::menu-dropdown title="E-Commerce" icon="la la-cog">
     <x-backpack::menu-dropdown-item title="Productos" icon="la la-question" :link="backpack_url('product')" />

@@ -43,6 +43,14 @@ class ProductCrudController extends CrudController
        CRUD::addColumns(
         [
             [
+                'name' => 'main_image',  // Nombre de la columna de la base de datos
+                'label' => 'Main Image',
+                'type' => 'image',
+                'prefix' => 'storage/', // Prefijo para las rutas de las imágenes
+                'height' => '50px',
+                'width' => '50px',
+            ],
+            [
                 'name' => 'name',
                 'type' => 'text',
                 'label' => 'Nombre',
@@ -82,14 +90,6 @@ class ProductCrudController extends CrudController
                 'model' => \App\Models\Brand::class,
             ],
             [
-                'name' => 'brand_id',
-                'type' => 'select',
-                'label' => 'Marca',
-                'entity' => 'brand',
-                'attribute' => 'name',
-                'model' => \App\Models\Brand::class,
-            ],
-            [
                 'name' => 'price',
                 'type' => 'number',
                 'label' => 'Precio',
@@ -110,6 +110,7 @@ class ProductCrudController extends CrudController
                 'name' => 'is_featured',
                 'type' => 'boolean',
                 'label' => 'Se muestra en la página principal',
+                'default' => 1,
             ],
         ]
         );
@@ -141,9 +142,11 @@ class ProductCrudController extends CrudController
                     'label' => 'Slug',
                 ],
                 [
-                    'name' => 'main_image',
-                    'type' => 'upload',
+                    'name'  => 'main_image',
                     'label' => 'Imagen principal (tamaño 800x800)',
+                    'type'  => 'upload',
+                    'upload' => true,
+                    'disk' => 'public', 
                 ],
                 [
                     'name' => 'category_id',
@@ -208,8 +211,10 @@ class ProductCrudController extends CrudController
                 ],
                 [
                     'name' => 'banner_image',
-                    'type' => 'upload',
                     'label' => 'Imagen del banner (tamaño 1920x500)',
+                    'type'  => 'upload',
+                    'upload' => true,
+                    'disk' => 'public', 
                 ],
             ]
         );

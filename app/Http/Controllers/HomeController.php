@@ -46,9 +46,9 @@ class HomeController extends Controller
             ->get();
 
         $products = Product::where('is_featured', true)
-            ->with('brand', 'category', 'subcategory')
+            ->where('is_new', true)
+            ->with('brand', 'category', 'subcategory','stock')
             ->get();
-
         return view('frontend.home')
         ->with('offers', $offers)
         ->with('products_banners', $products_banners)

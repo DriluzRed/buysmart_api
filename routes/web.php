@@ -44,6 +44,7 @@ Route::get('/subcategories/{slug}', [App\Http\Controllers\SubcategoryController:
 //cart routes
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'getCart']);
 Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'addToCart']);
+Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'updateCartItem']);
 Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'removeFromCart']);
 
 //checkout routes

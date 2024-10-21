@@ -24,7 +24,31 @@
     .dropdown-submenu > .dropdown-menu {
         display: none;
     }
-    .dropdown-submenu.open > .dropdown-menu {
+    .dropdown-submenu.show > .dropdown-menu {
         display: block;
     }
+}
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card .add-to-cart {
+    position: relative;
+    z-index: 1;
+}
+
+.product-card .card-body {
+    position: relative;
+    z-index: 0;
+}
+
+.product-card .stretched-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.product-card .card-footer {
+    text-align: center;
 }

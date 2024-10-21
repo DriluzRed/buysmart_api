@@ -42,7 +42,7 @@
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    
+                    <span class="fas fa-envelope"></span>
                 </div>
             </div>
 
@@ -54,8 +54,13 @@
         </div>
         {{-- birthdate field --}}
         <div class="input-group mb-3">
-            <input type="date" name="birthdate" class="form-control @error('birthdate') is-invalid @enderror"
+            <input type="date" name="birthdate" class="form-control @error('birthdate') is-invalid @enderror datepicker"
                    value="{{ old('birthdate') }}" placeholder="Fecha de nacimiento">
+                   <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-calendar"></span>
+                    </div>
+                </div>
             @error('birthdate')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -65,11 +70,11 @@
         {{-- CI field --}}
         <div class="input-group mb-3">
             <input type="ci" name="ci" class="form-control @error('ci') is-invalid @enderror"
-                   value="{{ old('ci') }}" placeholder="Ci">
+                   value="{{ old('ci') }}" placeholder="CI">
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    <span class="fas fa-id-card"></span>
                 </div>
             </div>
 
@@ -82,11 +87,11 @@
         {{-- Phone field --}}
         <div class="input-group mb-3">
             <input type="phone" name="phone" class="form-control @error('phone') is-invalid @enderror"
-                   value="{{ old('phone') }}" placeholder="Phone">
+                   value="{{ old('phone') }}" placeholder="Celular">
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_phone_icon', '') }}"></span>
+                    <span class="fas fa-phone"></span>
                 </div>
             </div>
 
@@ -136,16 +141,18 @@
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
-            {{ __('adminlte::adminlte.register') }}
+            Registrarse
         </button>
 
     </form>
 @stop
 
 @section('auth_footer')
-    <p class="my-0">
+    <p class="my-0 text-center">
         <a href="{{ $login_url }}">
-            {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+            Ya tengo una cuenta
         </a>
     </p>
 @stop
+
+@include('frontend.layouts.js-scripts')

@@ -1,0 +1,38 @@
+<div class="col-md-4 col-lg-3 mb-4">
+    <div class="card product-card h-100 d-flex flex-column">
+        @php
+            $imagePath = 'storage/' . $product->main_image;
+        @endphp
+        <a href="{{ route('products.show', $product->slug) }}" class="stretched-link text-decoration-none flex-grow-1">
+            @if($product->is_new)
+                <h3><span class="badge bg-primary">Nuevo</span></h3>
+            @endif
+            <img src="{{ asset(file_exists(public_path($imagePath)) ? $imagePath : $defaultImage) }}" class="card-img-top" alt="{{ $product->name }}">
+            <div class="card-body">
+                <h5 class="card-title text-dark">{{ $product->name }}</h5>
+                <p class="card-text text-dark">{{ $product->description }}</p>
+                @if($product->stock->quantity > 0)
+                    <p class="card-text text-success">Disponible</p>
+                @else
+                    <p class="card-text text-danger">Agotado</p>
+                @endif
+                <p class="card-text text-dark">Precio: ${{ $product->price }}</p>
+            </div>
+        </a>
+        <div class="card-footer bg-transparent border-0 mt-auto">
+            @if($product->stock->quantity > 0)
+            <button class="btn btn-primary add-to-cart" 
+                    data-item-id="{{ $product->id }}" 
+                    data-item-name="{{ $product->name }}" 
+                    data-item-price="{{ $product->price }}">
+                <i class="fas fa-cart-plus"></i> Agregar al carrito
+            </button>
+            @else
+            <button class="btn btn-secondary" disabled>
+                <i class="fas fa-cart-plus"></i> Agregar al carrito
+            </button>
+            @endif
+
+        </div>
+    </div>
+</div>
