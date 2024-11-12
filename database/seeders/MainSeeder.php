@@ -123,14 +123,14 @@ class MainSeeder extends Seeder
             'name' => 'Pago contra entrega',
             'description' => 'Pago en efectivo o tarjeta al momento de la entrega',
             'image' => 'cash-on-delivery.png',
-            'active' => 1,
+            'is_active' => 1,
         ]);
 
         \App\Models\PaymentMethod::create([
             'name' => 'Tarjeta de Debito/Credito',
             'description' => 'Pago con tarjeta de débito o crédito',
             'image' => 'credit-card.png',
-            'active' => 1,
+            'is_active' => 1,
         ]);
 
         \App\Models\User::create([
