@@ -13,7 +13,7 @@ class MainSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Setting::created([
+        \App\Models\Setting::create([
             'key' => 'delivery_cost',
             'name' => 'Costo del Delivery',
             'value' => '50000',
@@ -22,7 +22,7 @@ class MainSeeder extends Seeder
             'active' => 1,
         ]);
 
-        \App\Models\Setting::created([
+        \App\Models\Setting::create([
             'key' => 'faqs',
             'name' => 'FAQS',
             'value' => '[
@@ -48,7 +48,7 @@ class MainSeeder extends Seeder
             'field' => 'faq',
             'active' => 1,
         ]);
-        \App\Models\Setting::created([
+        \App\Models\Setting::create([
             'key' => 'security',
             'name' => 'Politica de Seguridad',
             'value' => '<div class="container mt-5">
@@ -110,7 +110,7 @@ class MainSeeder extends Seeder
             'active' => 1,
         ]);
 
-        \App\Models\Setting::created([
+        \App\Models\Setting::create([
             'key' => 'terms',
             'name' => 'Terminos de Servicio',
             'value' => null,
@@ -119,21 +119,21 @@ class MainSeeder extends Seeder
             'active' => 1,
         ]);
 
-        \App\Models\PaymentMethod::created([
+        \App\Models\PaymentMethod::create([
             'name' => 'Pago contra entrega',
             'description' => 'Pago en efectivo o tarjeta al momento de la entrega',
             'image' => 'cash-on-delivery.png',
             'active' => 1,
         ]);
 
-        \App\Models\PaymentMethod::created([
+        \App\Models\PaymentMethod::create([
             'name' => 'Tarjeta de Debito/Credito',
             'description' => 'Pago con tarjeta de débito o crédito',
             'image' => 'credit-card.png',
             'active' => 1,
         ]);
 
-        \App\Models\User::created([
+        \App\Models\User::create([
             'name' => 'Admin',
             'email' => 'admin@buysmart.com',
             'password' => Hash::make('123456'),
@@ -144,7 +144,7 @@ class MainSeeder extends Seeder
             'birthdate ' => '1990-01-01',
         ]);
 
-        \App\Models\Customer::created([
+        \App\Models\Customer::create([
             'name' => 'Customer',
             'email' => 'customer@buysmart.com',
             'phone' => '12345678',
