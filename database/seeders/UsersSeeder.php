@@ -20,7 +20,7 @@ class UsersSeeder extends Seeder
             'role' => 'admin',
             'ci' => '11111111',
             'phone' => '12345678',
-            'birthdate ' => '1990-01-01',
+            'birthdate' => '1990-01-01',
         ]);
 
         \App\Models\Customer::create([
