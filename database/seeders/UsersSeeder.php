@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('123456'),
             'role' => 'admin',
             'ci' => '11111111',
-            'phone ' => '12345678',
+            'phone' => '12345678',
             'birthdate ' => '1990-01-01',
         ]);
 
