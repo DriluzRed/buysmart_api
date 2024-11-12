@@ -1,10 +1,13 @@
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach ($sliders as $index => $slider)
-            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                <a href="{{ $slider->slug }}">
-                    <img src="{{ asset($slider->banner_image) }}" class="d-block w-100" alt="Slider Image"  width="1200px" height="500px">
-                </a>
+        @foreach ($images as $key => $image)
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ asset('storage/'.$image->banner_image) }}" class="d-block w-100" alt="{{ $image->name }}" style="height: 400px; object-fit: cover;">
+                @if($image->name)
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ $image->name }}</h5>
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>

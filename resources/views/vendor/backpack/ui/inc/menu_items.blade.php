@@ -5,8 +5,6 @@
     <x-backpack::menu-dropdown-item title="Usuarios" icon="la la-user" :link="backpack_url('user')" />
     <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
     <x-backpack::menu-dropdown-item title="Permisos" icon="la la-key" :link="backpack_url('permission')" />
-    <x-backpack::menu-dropdown-header title="Gestion de Clientes" />
-    <x-backpack::menu-dropdown-item title="Clientes" icon="la la-user" :link="backpack_url('client')" />
 </x-backpack::menu-dropdown>
 <x-backpack::menu-dropdown title="Configuraciones del sistema" icon="la la-cog">
     <x-backpack::menu-dropdown-item title='Configuraciones de Entorno' icon='la la-cog' :link="backpack_url('setting')" />

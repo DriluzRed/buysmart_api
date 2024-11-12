@@ -6,6 +6,8 @@ use App\Http\Requests\ProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\Storage;
+
 
 /**
  * Class ProductCrudController
@@ -15,10 +17,10 @@ use App\Models\ProductImage;
 class ProductCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -44,7 +46,7 @@ class ProductCrudController extends CrudController
         [
             [
                 'name' => 'main_image',  // Nombre de la columna de la base de datos
-                'label' => 'Main Image',
+                'label' => 'Imagen',
                 'type' => 'image',
                 'prefix' => 'storage/', // Prefijo para las rutas de las imágenes
                 'height' => '50px',
@@ -216,9 +218,16 @@ class ProductCrudController extends CrudController
                     'upload' => true,
                     'disk' => 'public', 
                 ],
+                [
+                    'name' => 'images', // El nombre del campo
+                    'label' => 'Imágenes del producto', // Etiqueta del campo
+                    'type' => 'upload_multiple', // Tipo de campo para múltiples archivos
+                    'upload' => true, // Permitir subida de archivos
+                    'disk' => 'public', // El disco donde se guardarán (asegúrate de que esté configurado en config/filesystems.php)
+                ]
             ]
         );
-        CRUD::field('additional_images')->type('upload_multiple')->label('Imágenes del producto')->upload(true);
+        
     }
 
     /**
@@ -229,8 +238,69 @@ class ProductCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
+        $this->crud->hasAccessOrFail('update');
+
+        // Llama a setupCreateOperation para configurar todos los campos
         $this->setupCreateOperation();
+
+        // Luego agrega o ajusta cualquier campo específico para la operación de actualización aquí
+        $product = $this->crud->getCurrentEntry();
+
+        // Modifica el campo de imágenes para mostrar las existentes
+        $this->crud->addField([
+            'name' => 'images',
+            'label' => 'Imágenes del producto',
+            'type' => 'upload_multiple',
+            'upload' => true,
+            'disk' => 'public',
+            'value' => $product->productImages->pluck('image')->map(function($path) {
+                return ($path);
+            })->toArray(), // Asegúrate de que sea un array de URLs
+        ]);
     }
 
+
+    public function store(ProductRequest $request)
+    {
+        $response = $this->traitStore();
     
+        if ($request->hasFile('images')) {
+            $productId = $this->crud->entry->id;
+    
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('uploads/products/images', 'public'); // Cambia 'images' y 'public' según tu configuración
+    
+                ProductImage::create([
+                    'product_id' => $productId,
+                    'image' => $path,
+                ]);
+            }
+        }
+    
+        return $response;
+    }
+    
+    public function update(ProductRequest $request)
+    {
+        $response = $this->traitUpdate();
+        if($request->has('clear_images')) {
+            ProductImage::where('product_id', $this->crud->getCurrentEntryId())->delete();
+        }
+        if ($request->has('images')) {
+            $productId = $this->crud->entry->id;
+    
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('uploads/products/images', 'public'); // Cambia 'images' y 'public' según tu configuración
+    
+                ProductImage::create([
+                    'product_id' => $productId,
+                    'image' => $path,
+                ]);
+            }
+        }
+        
+        return $response;
+    }
+    
+
 }

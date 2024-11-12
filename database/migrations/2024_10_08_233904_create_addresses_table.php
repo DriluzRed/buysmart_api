@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address_line_2')->nullable();
             $table->foreignId('department_id')->constrained();
             $table->foreignId('city_id')->constrained();
-            $table->foreignId('neighborhood_id')->constrained();
+            $table->foreignId('neighborhood_id')->nullable();
             $table->enum('type', ['home', 'work', 'other']);
             $table->boolean('is_main')->default(false);
             $table->boolean('for_billing')->default(false);

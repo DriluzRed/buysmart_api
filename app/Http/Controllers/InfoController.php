@@ -3,62 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Setting;
 class InfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function faq()
     {
-        //
+        $faqSetting = Setting::where('key', 'faqs')->first();
+        $faqs = $faqSetting ? json_decode($faqSetting->value) : [];
+        return view('frontend.info.faq')->with('faqs', $faqs);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function security()
     {
-        //
+        $security = Setting::where('key', 'security')->first();
+        return view('frontend.info.security-policy')->with('security', $security->value);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function terms()
     {
-        //
+        $terms = Setting::where('key', 'terms')->first();
+        return view('frontend.info.terms-service')->with('terms', $terms->value);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

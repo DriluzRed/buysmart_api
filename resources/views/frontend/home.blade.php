@@ -4,7 +4,7 @@
 
 <!-- Offers Section -->
 <div class="container mt-5">
-    @include('components.slider', ['sliders' => $products_banners])
+    <x-slider />
     <h2 class="text-center">Ofertas destacadas</h2>
     <div class="row">
         @if($offers->isNotEmpty())

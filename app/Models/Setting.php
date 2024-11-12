@@ -23,7 +23,14 @@ class Setting extends Model
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
-
+    protected $fillable = [
+        'key',
+        'name',
+        'value',
+        'description',
+        'field',
+        'active',
+    ];
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

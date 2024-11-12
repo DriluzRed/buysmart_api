@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -34,9 +35,40 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Request $request, $slug)
     {
-        //
+        try {
+            // Obtener la categoría por el slug
+            $category = Category::where('slug', $slug)->with('subcategories')->firstOrFail();
+
+            // Obtener los productos de la categoría
+            $query = Product::query();
+            $query->where('category_id', $category->id);
+
+            // Aplicar filtros
+            if ($request->filled('search')) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            }
+
+            if ($request->filled('subcategory')) {
+                $query->where('sub_category_id', $request->subcategory);
+            }
+
+            if ($request->filled('min_price')) {
+                $query->where('price', '>=', $request->min_price);
+            }
+
+            if ($request->filled('max_price')) {
+                $query->where('price', '<=', $request->max_price);
+            }
+
+            // Obtener los productos filtrados
+            $products = $query->paginate(10);
+            
+            return view('frontend.categories.show', compact('category', 'products'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained();
-            $table->enum('status', ['pending', 'processed', 'shipped', 'delivered']);
+            $table->enum('status', ['pending', 'processed', 'shipped', 'delivered', 'canceled', 'finished', 'returned', 'refunded']);
             $table->foreignId('payment_method_id')->constrained();
             $table->enum('payment_status', ['pending', 'paid', 'failed', 'canceled']);
             $table->foreignId('address_id')->constrained();

@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\Helper;
 
 class Product extends Model
 {
@@ -50,7 +51,9 @@ class Product extends Model
             $path = $value->store($destination_path, $disk);
 
             // Elimina la imagen anterior si ya existe
-            Storage::disk($disk)->delete($this->{$attribute_name});
+            if ($this->{$attribute_name}) {
+                Storage::disk($disk)->delete($this->{$attribute_name});
+            }
 
             // Guarda la nueva ruta en la base de datos
             $this->attributes[$attribute_name] = $path;
@@ -86,7 +89,6 @@ class Product extends Model
     }
 
 
-
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
@@ -109,7 +111,7 @@ class Product extends Model
 
     public function subcategory()
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
     public function sizes()
@@ -120,6 +122,13 @@ class Product extends Model
     public function stock()
     {
         return $this->hasOne(Stock::class);
+    }
+
+    public static function getAllBanners()
+    {
+        return Product::where('banner_image', '!=', null)
+        ->where('on_slider', 1)
+        ->get();
     }
     
 }

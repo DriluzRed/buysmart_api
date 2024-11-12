@@ -4,22 +4,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
+use App\Helpers\Helper;
+use Illuminate\Support\Facades\Cookie;
 
 
 class CartController extends Controller
 {
     public function getCart()
     {
-        if (Auth::check()) {
-            $cart = Cart::where('user_id', Auth::id())->with('items.product')->first();
+        if (Auth::guard('customer')->check()) {
+            $customerId = Auth::guard('customer')->id();
+            $cart = Cart::where('customer_id', $customerId)->with('items.product')->first();
+            $cookieCart = json_decode(request()->cookie('cart'), true) ?? [];
+            if (!empty($cookieCart)) {
+                if (!$cart) {
+                    $cart = Cart::create(['customer_id' => $customerId]);
+                }
+                foreach ($cookieCart as $item) {
+                    $product = Product::find($item['id']);
+                    if ($product) {
+                        $cartItem = $cart->items()->where('product_id', $product->id)->first();
+                        if ($cartItem) {
+                            $cartItem->quantity += $item['quantity'];
+                            $cartItem->save();
+                        } else {
+                            $cart->items()->create([
+                                'product_id' => $product->id,
+                                'quantity' => $item['quantity'],
+                            ]);
+                        }
+                    }
+                }
+                Cookie::queue(Cookie::forget('cart'));
+            }
+
             $items = $cart ? $cart->items->map(function ($item) {
                 return [
                     'id' => $item->product->id,
                     'name' => $item->product->name,
-                    'price' => $item->product->sale_price,
+                    'price' => $item->product->sale_price ? Helper::formatPrice($item->product->sale_price) : Helper::formatPrice($item->product->price),
                     'quantity' => $item->quantity,
                     'image_url' => asset('storage/' . $item->product->main_image)
                 ];
@@ -32,7 +58,7 @@ class CartController extends Controller
                 return [
                     'id' => $product->id,
                     'name' => $product->name,
-                    'price' => $product->sale_price,
+                    'price' => $product->sale_price ? Helper::formatPrice($product->sale_price) : Helper::formatPrice($product->price),
                     'quantity' => $item['quantity'],
                     'image_url' => asset('storage/' . $product->main_image)
                 ];
@@ -41,17 +67,41 @@ class CartController extends Controller
         }
     }
 
+    public function syncCart(Request $request)
+    {
+        $cart = $request->input('cart', []);
+        $items = collect($cart)->map(function ($item) {
+            $product = Product::find($item['id']);
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->sale_price ? Helper::formatPrice($product->sale_price) : Helper::formatPrice($product->price),
+                'quantity' => $item['quantity'],
+                'image_url' => asset('storage/' . $product->main_image)
+            ];
+        });
+        return response()->json($items);
+    }
+
+
     public function addToCart(Request $request)
     {
+        // dd($request->all());
         $itemData = $request->input('item');
         $product = Product::find($itemData['id']);
-        $totalStock = $product->stock->quantity;
+        $totalStock = 0;
+        if(isset($product->stock->quantity) && $product->stock->quantity > 0){
+            $totalStock = $product->stock->quantity;
+        }else{
+            return response()->json(['success' => false, 'message' => 'Producto agotado']);
+        }
+        
         if ($totalStock == 0) {
             return response()->json(['success' => false, 'message' => 'Producto agotado']);
         }
 
-        if (Auth::check()) {
-            $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
+        if (Auth::guard('customer')->check()) {
+            $cart = Cart::firstOrCreate(['customer_id' => Auth::guard('customer')->id()]);
             $cartItem = $cart->items()->where('product_id', $itemData['id'])->first();
 
             if ($cartItem) {
@@ -98,8 +148,8 @@ class CartController extends Controller
         // Verificar si hay stock disponible
         $totalStock = $product->stock->quantity;
 
-        if (Auth::check()) {
-            $cart = Cart::where('user_id', Auth::id())->first();
+        if (Auth::guard('customer')->check()) {
+            $cart = Cart::where('customer_id', Auth::guard('customer')->id())->first();
             $cartItem = $cart->items()->where('product_id', $itemId)->first();
             if ($cartItem) {
                 // Verificar si la cantidad en el carrito más la cantidad solicitada supera el stock disponible
@@ -140,8 +190,8 @@ class CartController extends Controller
     {
         $itemId = $request->input('item_id');
 
-        if (Auth::check()) {
-            $cart = Cart::where('user_id', Auth::id())->first();
+        if (Auth::guard('customer')->check()) {
+            $cart = Cart::where('customer_id',Auth::guard('customer')->id())->first();
             $cart->items()->where('product_id', $itemId)->delete();
         } else {
             $cart = json_decode($request->cookie('cart'), true) ?? [];
@@ -150,7 +200,9 @@ class CartController extends Controller
             });
             return response()->json($cart)->cookie('cart', json_encode($cart), 60 * 24 * 30);
         }
-
+        if ($cart->items->count() == 0) {
+            $cart->delete();
+        }
         return response()->json(['success' => true]);
     }
 }

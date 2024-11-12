@@ -12,7 +12,7 @@ class Order extends Model
     use HasFactory;
     
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'status',
         'payment_method_id',
         'payment_status',
@@ -45,6 +45,24 @@ class Order extends Model
     public function invoice()
     {
         return $this->hasOne(Invoice::class);
+    }
+    
+    public function getStatusTranslatedAttribute()
+    {
+        $statuses = [
+            'pending' => 'Pendiente',
+            'confirmed' => 'Confirmado',
+            'delivered' => 'Entregado',
+            'shipped' => 'Enviado',
+            'completed' => 'Completado',
+            'refunded' => 'Reembolsado',
+            'failed' => 'Fallido',
+            'declined' => 'Rechazado',
+            'holded' => 'Retenido',
+            'cancelled' => 'Cancelado',
+        ];
+
+        return $statuses[$this->status] ?? $this->status;
     }
 
 }

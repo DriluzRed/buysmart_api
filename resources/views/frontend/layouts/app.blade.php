@@ -13,8 +13,8 @@
     <!-- Estilos personalizados -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    @section('styles')
-    @endsection
+    @vite('resources/css/app.css')
+    @yield('styles')
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="fas fa-store"></i> {{ config('app.name', 'Mi E-commerce') }}
+                <img src="{{ asset('img/buysmart-logo-texto-sin-fondo.png') }}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,20 +46,10 @@
                             <a class="dropdown-item" href="{{ route('products.index') }}"><i class="fas fa-boxes"></i> Todos los productos</a>
                             <hr>
                             @foreach ($categories as $category)
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#" id="submenu-{{ $category->id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-tag"></i> {{ $category->name }}
-                                    </a>
-                                    @if ($category->subcategories->isNotEmpty())
-                                        <ul class="dropdown-menu" aria-labelledby="submenu-{{ $category->id }}">
-                                            @foreach ($category->subcategories as $subcategory)
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ route('subcategories.show', $subcategory->slug) }}"><i class="fas fa-tags"></i> {{ $subcategory->name }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
+                                <a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">
+                                    <i class="fas fa-box
+                                    "></i> {{ $category->name }}
+                                </a>
                             @endforeach
                         </ul>
                     </li>
@@ -85,25 +75,29 @@
                         </button>
                     </li>
                     <!-- Authentication Links -->
-                    @guest
-                        @if (Route::has('login'))
+                    @guest('customer')  
+                        @if (Route::has('customer.login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a>
+                                <a class="nav-link" href="{{ route('customer.login') }}">Iniciar sesión</a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ Auth::guard('customer')->user()->name }}
                             </a>
+                            
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="{{ route('customer.profile') }}">Mis Datos</a>
+                                <a class="dropdown-item" href="{{ route('customer.orders') }}">Mis Pedidos</a>
+                                <a class="dropdown-item" href="{{ route('customer.change-password') }}">Cambiar Contraseña</a>
+                                <a class="dropdown-item" href="{{ route('customer.logout') }}"
                                     onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     Cerrar sesión
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('customer.logout') }}" method="GET" class="d-none">
                                     @csrf
                                 </form>
                             </div>
@@ -130,10 +124,11 @@
                 <div class="col-md-4 text-center">
                     <h5>Enlaces útiles</h5>
                     <ul class="list-unstyled">
-                        {{-- <li><a href="{{ route('info.security-policy') }}">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}">Términos de Servicio</a></li>
-                        <li><a href="{{ route('info.contact') }}">Contacto</a></li> --}}
+                        <li><a href="{{ route('info.faq') }}" class="text-black text-decoration-none">Preguntas Frecuentes</a></li>
+                        <li><a href="{{ route('info.security-policy') }}" class="text-black text-decoration-none">Política de Privacidad</a></li>
+                        <li><a href="{{ route('info.service-terms') }}" class="text-black text-decoration-none">Términos de Servicio</a></li>
                     </ul>
+                    
                 </div>
                 <div class="col-md-4 text-center text-md-right">
                     <h5>Síguenos</h5>
@@ -146,25 +141,7 @@
     </footer>
 
     <!-- Modal del carrito -->
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cartModalLabel">Carrito de Compras</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul id="cart-items" class="list-group">
-                        <!-- Los elementos del carrito se agregarán aquí dinámicamente -->
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <a href="{{ route('checkout') }}" class="btn btn-primary">Proceder al pago</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('components.cart-modal')
 
     <!-- Bootstrap JS and dependencies (Popper.js and jQuery if needed) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -181,13 +158,7 @@
             });
             
 
-            $('.dropdown-submenu > a').on('click', function(event) {
-                event.preventDefault();
-                var $parent = $(this).parent();
-                $parent.toggleClass('show');
-                $parent.find('.dropdown-menu').first().toggle();
-            });
-
+            
             $('#search-input').on('keyup', function() {
                 var query = $(this).val();
                 if (query.length > 2) {
@@ -210,11 +181,12 @@
                 var itemId = $(this).data('item-id');
                 var itemName = $(this).data('item-name');
                 var itemPrice = $(this).data('item-price');
-
+                var itemQuantity = $('#quantity').val();
                 var item = {
                     id: itemId,
                     name: itemName,
-                    price: itemPrice
+                    price: itemPrice,
+                    quantity: itemQuantity
                 };
 
                 $.ajax({
@@ -258,12 +230,15 @@
                 success: function(data) {
                     var cartItems = $('#cart-items');
                     cartItems.empty();
+                    if(data.length === 0){
+                        cartItems.append('<li class="list-group-item text-center">No hay productos en el carrito</li>');
+                    }
                     data.forEach(function(item) {
                         cartItems.append(`
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <img src="${item.image_url}" alt="${item.name}" class="img-thumbnail" style="width: 50px; height: 50px;">
-                                    ${item.name} - $${item.price}
+                                    ${item.name} - Gs. ${item.price}
                                     <div class="input-group mt-2">
                                         <button class="btn btn-outline-secondary btn-decrement" data-item-id="${item.id}">-</button>
                                         <input type="text" class="form-control text-center" value="${item.quantity}" readonly>
@@ -355,10 +330,9 @@
                 }
             });
         }
+        
     </script>
-    @section('scripts')
-    @endsection
-
+    @yield('scripts')
 </body>
 
 </html>
