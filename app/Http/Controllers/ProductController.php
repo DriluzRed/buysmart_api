@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Subcategory;
+use App\Models\SubCategory;
 
 class ProductController extends Controller
 {
@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-        $subcategories = Subcategory::all();
+        $subcategories = SubCategory::all();
 
         $query = Product::query();
 
