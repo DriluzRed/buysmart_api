@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Subcategory;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 
 class SubCategorySeeder extends Seeder
@@ -27,7 +27,7 @@ class SubCategorySeeder extends Seeder
         ];
 
         foreach ($subcategories as $subcategory) {
-            Subcategory::create($subcategory);
+            SubCategory::create($subcategory);
         }
     }
 }
