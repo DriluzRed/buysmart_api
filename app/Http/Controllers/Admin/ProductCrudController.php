@@ -109,6 +109,16 @@ class ProductCrudController extends CrudController
 
             ],
             [
+                'name' => 'sale_start',
+                'type' => 'datetime',
+                'label' => 'Inicio de la oferta',
+            ],
+            [
+                'name' => 'sale_end',
+                'type' => 'datetime',
+                'label' => 'Fin de la oferta',
+            ],
+            [
                 'name' => 'is_featured',
                 'type' => 'boolean',
                 'label' => 'Se muestra en la página principal',
@@ -190,6 +200,16 @@ class ProductCrudController extends CrudController
                     'type' => 'number',
                     'label' => 'Precio de oferta',
 
+                ],
+                [
+                    'name' => 'sale_start',
+                    'type' => 'datetime',
+                    'label' => 'Inicio de la oferta',
+                ],
+                [
+                    'name' => 'sale_end',
+                    'type' => 'datetime',
+                    'label' => 'Fin de la oferta',
                 ],
                 [
                     'name' => 'is_featured',
