@@ -286,7 +286,7 @@ class ProductCrudController extends CrudController
         if($request->has('clear_images')) {
             ProductImage::where('product_id', $this->crud->getCurrentEntryId())->delete();
         }
-        if ($request->has('images')) {
+        if ($request->hasFile('images')) {
             $productId = $this->crud->entry->id;
     
             foreach ($request->file('images') as $file) {
