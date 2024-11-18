@@ -99,3 +99,9 @@ Route::get('/order/success/{id}', function ($id) {
 Route::get('politicas-de-seguridad', [App\Http\Controllers\InfoController::class, 'security'])->name('info.security-policy');
 Route::get('terminos-de-servicio', [App\Http\Controllers\InfoController::class, 'terms'])->name('info.service-terms');
 Route::get('faq', [App\Http\Controllers\InfoController::class, 'faq'])->name('info.faq');
+
+//report routes
+Route::post('report/', [App\Http\Controllers\Admin\ReportController::class, 'run'])->name('report.download');
+Route::post('/reports/delete-file', [App\Http\Controllers\Admin\ReportController::class, 'deleteFile'])->name('report.deleteFile');
+
+

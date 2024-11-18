@@ -22,4 +22,5 @@
     <x-backpack::menu-dropdown-item title="Marcas" icon="la la-question" :link="backpack_url('brand')" />
     <x-backpack::menu-dropdown-item title="Pedidos" icon="la la-question" :link="backpack_url('order')" />
     <x-backpack::menu-dropdown-item title="Clientes" icon="la la-question" :link="backpack_url('customer')" />
+    <x-backpack::menu-dropdown-item title="Reportes" icon="la la-question" :link="backpack_url('reports')" />
 </x-backpack::menu-dropdown>

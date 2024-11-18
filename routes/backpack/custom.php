@@ -31,6 +31,8 @@ Route::group([
     Route::crud('stock', 'StockCrudController');
     Route::crud('setting', 'SettingCrudController');
     Route::crud('page', 'PageCrudController');
+    Route::get('dashboard', 'DashboardController@index')->name('backpack.dashboard');
+    Route::get('reports', 'ReportController@index')->name('backpack.reports');
 }); // this should be the absolute last line of this file
 
 /**
