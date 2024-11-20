@@ -15,11 +15,16 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Electronics', 'slug' => Str::slug('Electronics')],
-            ['name' => 'Home Appliances', 'slug' => Str::slug('Home Appliances')],
-            ['name' => 'Books', 'slug' => Str::slug('Books')],
-            ['name' => 'Clothing', 'slug' => Str::slug('Clothing')],
-            ['name' => 'Sports', 'slug' => Str::slug('Sports')],
+            ['name' => 'Electronicas', 'slug' => Str::slug('electronica')],
+            ['name' => 'Ropa', 'slug' => Str::slug('ropa')],
+            ['name' => 'Zapatos', 'slug' => Str::slug('zapatos')],
+            ['name' => 'Computadoras', 'slug' => Str::slug('computadoras')],
+            ['name' => 'Accesorios', 'slug' => Str::slug('accesorios')],
+            ['name' => 'Hogar', 'slug' => Str::slug('hogar')],
+            ['name' => 'Juguetes', 'slug' => Str::slug('juguetes')],
+            ['name' => 'Deportes', 'slug' => Str::slug('deportes')],
+            ['name' => 'Salud', 'slug' => Str::slug('salud')],
+            ['name' => 'Belleza', 'slug' => Str::slug('belleza')],
         ];
 
         foreach ($categories as $category) {
