@@ -110,7 +110,32 @@
                     </div>
                 </div>
             </div>
-
+            <div class="card-header">
+                <h4>Reportes</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reports as $report)
+                                <tr>
+                                    <td>{{ $report->name }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" onclick="submitReportForm({{ $report->id }})">Descargar en Excel</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $reports->links() }}
+                </div>
+            </div>
         </div>
 
     </div>
@@ -118,8 +143,31 @@
 @section('after_scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-
-        });
+        function submitReportForm(reportId) {
+            var form = document.createElement('form');
+            form.action = "{{ route('report.download') }}";
+            form.method = 'POST';
+            form.id = 'reportForm';
+            form.style.display = 'none';
+            var report_id = document.createElement('input');
+            report_id.name = 'report_id';
+            report_id.value = reportId;
+            var desde = document.createElement('input');
+            desde.name = 'desde';
+            desde.value = document.getElementById('desde').value;
+            var hasta = document.createElement('input');
+            hasta.name = 'hasta';
+            hasta.value = document.getElementById('hasta').value;
+            form.appendChild(report_id);
+            form.appendChild(desde);
+            form.appendChild(hasta);
+            document.body.appendChild(form);
+            var token = document.createElement('input');
+            token.name = '_token';
+            token.value = "{{ csrf_token() }}";
+            token.type = 'hidden';
+            form.appendChild(token);
+            form.submit();
+        }
     </script>
 @endsection

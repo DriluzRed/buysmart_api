@@ -10,6 +10,9 @@
 @section('header')
     <section class="content-header">
         <h1>Reportes</h1>
+        <a href="{{ route('backpack.reports.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Agregar nuevo reporte
+        </a>
     </section>
 @endsection
 

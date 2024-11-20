@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Carbon\Carbon;
+use App\Models\Report;
 
 class DashboardController extends Controller
 {
@@ -39,6 +40,8 @@ class DashboardController extends Controller
             ];
         }
 
-        return view('backoffice.admin.dashboard')->with('data', $data)->with('filteredData', $filteredData);
+        $reports = Report::paginate(10);
+
+        return view('backoffice.admin.dashboard')->with('data', $data)->with('filteredData', $filteredData)->with('reports', $reports);
     }
 }

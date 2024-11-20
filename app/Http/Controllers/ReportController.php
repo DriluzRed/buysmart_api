@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Report;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,19 +12,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
-    public function index()
-    {
-        $reports = Report::paginate(10);
-        return view('backoffice.admin.reports.index')->with('reports', $reports);
-    }
 
 
     public function run(Request $request)
     {
         $report = Report::findOrFail($request->report_id);
-        $query = $report->query;
-        $variables = $report->variables;
-    
+        $query = $report->custom_query;
+        $variables = json_decode($report->variables, true);
+        
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date') . ' 23:59:59';
         if ($startDate && $endDate) {
@@ -36,7 +30,6 @@ class ReportController extends Controller
                 }
             }
         } else {
-            // Si no hay start_date y end_date, usar la fecha de hoy
             $today = Carbon::today()->toDateString();
             if (isset($variables['DATERANGE']['fields'])) {
                 foreach ($variables['DATERANGE']['fields'] as $table => $column) {
@@ -45,12 +38,11 @@ class ReportController extends Controller
                 }
             }
         }
-    
         try {
             // Asegúrate de que la consulta sea una cadena de texto
             $query = (string) $query;
             $results = DB::select($query);
-    
+            
             // Verificar si hay resultados
             if (empty($results)) {
                 return redirect()->back()->with('error', 'No se encontraron resultados');

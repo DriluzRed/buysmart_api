@@ -11,6 +11,8 @@
     <x-backpack::menu-dropdown-item title="Departmentos" icon="la la-question" :link="backpack_url('department')" />
     <x-backpack::menu-dropdown-item title="Ciudades" icon="la la-question" :link="backpack_url('city')" />
     <x-backpack::menu-dropdown-item title="Barrios" icon="la la-question" :link="backpack_url('neighborhood')" />
+<x-backpack::menu-dropdown-item title="Reportes" icon="la la-question" :link="backpack_url('report')" />
+
     {{-- <x-backpack::menu-dropdown-item title='Paginas' icon='la la-file-o' :link="backpack_url('page')"/> --}}
 </x-backpack::menu-dropdown>
     <x-backpack::menu-dropdown title="E-Commerce" icon="la la-cog">
@@ -22,5 +24,5 @@
     <x-backpack::menu-dropdown-item title="Marcas" icon="la la-question" :link="backpack_url('brand')" />
     <x-backpack::menu-dropdown-item title="Pedidos" icon="la la-question" :link="backpack_url('order')" />
     <x-backpack::menu-dropdown-item title="Clientes" icon="la la-question" :link="backpack_url('customer')" />
-    <x-backpack::menu-dropdown-item title="Reportes" icon="la la-question" :link="backpack_url('reports')" />
 </x-backpack::menu-dropdown>
+
