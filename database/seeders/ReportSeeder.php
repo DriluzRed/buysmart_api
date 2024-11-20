@@ -40,7 +40,7 @@ class ReportSeeder extends Seeder
         ]);
 
         \App\Models\Report::create([
-            'name' => 'Reporte de Productos mas vendidos',
+            'name' => "Reporte de Productos mas vendidos',
             'custom_query' => 'SELECT 
                 products.name AS Producto,
                 SUM(order_items.quantity) AS Cantidad_Vendida,
@@ -58,7 +58,7 @@ class ReportSeeder extends Seeder
                 products.id, products.name, categories.name
             ORDER BY 
                 Cantidad_Vendida DESC;
-            ',
+            ",
             'variables' => '{"DATERANGE": {"fields": {"order_items": "created_at"}}}',
         ]);
 
