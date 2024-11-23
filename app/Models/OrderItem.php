@@ -33,5 +33,20 @@ class OrderItem extends Model
         return $this->hasOne(InvoiceItem::class);
     }
 
+    public function getProductNameAttribute()
+    {
+        return $this->product->name;
+    }
+
+    public function getFormattedItemsAttribute()
+    {
+        return $this->items->map(function ($item) {
+            return [
+                'product_name' => $item->product_name,
+                'quantity' => $item->quantity,
+                'price' => number_format($item->price, 2),
+            ];
+        })->toArray();
+    }
     
 }

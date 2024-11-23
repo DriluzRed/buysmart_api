@@ -28,7 +28,7 @@ class OrderCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Order::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/order');
-        CRUD::setEntityNameStrings('order', 'orders');
+        CRUD::setEntityNameStrings('pedido', 'pedidos');
     }
 
     /**
@@ -39,12 +39,71 @@ class OrderCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+       $this->crud->removeButton('create');
+       $this->crud->removeButton('delete');
+        CRUD::addColumn([
+            'name' => 'customer_id',
+            'type' => 'select',
+            'label' => 'Cliente',
+            'attribute' => 'name',
+            'entity' => 'customer',
+            'model' => \App\Models\Customer::class,
+            
+        ]);
+        CRUD::addColumn([
+            'name' => 'status',
+            'type' => 'enum',
+            'label' => 'Estado',
+            'options' => [
+                'pending' => 'Pendiente',
+                'processed' => 'Procesado',
+                'shipped' => 'Enviado',
+                'delivered' => 'Entregado',
+                'canceled' => 'Cancelado',
+                'finished' => 'Finalizado',
+                'returned' => 'Devuelto',
+                'refunded' => 'Reembolsado',
+            ],
+        ]);
+        CRUD::addColumn([
+            'name' => 'payment_method_id',
+            'type' => 'select',
+            'label' => 'Metodo de pago',
+            'attribute' => 'name',
+            'entity' => 'paymentMethod',
+            'model' => \App\Models\PaymentMethod::class,
+           
+        ]);
+        CRUD::addColumn([
+            'name' => 'payment_status',
+            'type' => 'enum',
+            'label' => 'Estado de pago',
+            'options' => ['pending' => 'Pendiente', 'completed' => 'Completado', 'canceled' => 'Cancelado', 'refunded' => 'Reembolsado', 'failed' => 'Fallido', 'processing' => 'Procesando', 'confirmed' => 'Confirmado','paid' => 'Pagado'],
+        ]);
+        CRUD::addColumn([
+            'name' => 'address_id',
+            'type' => 'select',
+            'label' => 'Direccion de envio',
+            'attribute' => 'full_address',
+            'entity' => 'address',
+            'model' => \App\Models\Address::class,
+        ]);
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'formatted_total',
+            'type' => 'text',
+            'label' => 'Total',
+        ]);
+        $this->crud->addColumn([
+            'name'  => 'created_at',
+            'type'  => 'text',
+            'label' => 'Fecha de creacion',
+        ]);
+        $this->crud->addColumn([
+            'name'  => 'updated_at',
+            'type'  => 'text',
+            'label' => 'Fecha de actualizacion',
+        ]);
     }
 
     /**
@@ -56,12 +115,7 @@ class OrderCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrderRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
-
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        
     }
 
     /**
@@ -72,6 +126,71 @@ class OrderCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(OrderRequest::class);
+
+        CRUD::field('status')->type('enum')->label('Estado')->options([
+            'pending' => 'Pendiente',
+            'processed' => 'Procesado',
+            'shipped' => 'Enviado',
+            'delivered' => 'Entregado',
+            'canceled' => 'Cancelado',
+            'finished' => 'Finalizado',
+            'returned' => 'Devuelto',
+            'refunded' => 'Reembolsado',
+        ]);
+
+        CRUD::addField([
+            'name' => 'payment_status',
+            'type' => 'enum',
+            'label' => 'Estado de pago',
+            'options' => ['pending' => 'Pendiente', 'completed' => 'Completado', 'canceled' => 'Cancelado', 'refunded' => 'Reembolsado', 'failed' => 'Fallido', 'processing' => 'Procesando', 'confirmed' => 'Confirmado','paid' => 'Pagado'],
+        ]);
+        
+    }
+
+    public function setupShowOperation()
+    {
+        $this->setupListOperation();
+        // En OrderCrudController.php
+
+        $this->crud->addColumn([
+            'name'  => 'items',
+            'type'  => 'custom_html',
+            'label' => 'Items de la Orden',
+            'value' => function ($order) {
+                $html = '<table class="table table-bordered"><thead><tr>
+                            <th></th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr></thead><tbody>';
+                foreach ($order->items as $item) {
+                    $image = asset('storage/'.$item->product->main_image);
+                    $subtotal = $item->quantity * $item->price;
+                    $html .= "<tr>
+                                <td><img src='{$image}' style='width: 50px; height: 50px;'></td>
+                                <td>{$item->product->name}</td>
+                                <td>{$item->quantity}</td>
+                                <td>Gs. {$item->price}</td>
+                                <td>Gs. {$subtotal}</td>
+                            </tr>";
+                }
+                $html .= '</tbody></table>';
+                return $html;
+            },
+        ]);
+        $this->crud->addColumn([
+            'name'  => 'created_at',
+            'type'  => 'text',
+            'label' => 'Fecha de creacion',
+        ]);
+        $this->crud->addColumn([
+            'name'  => 'updated_at',
+            'type'  => 'text',
+            'label' => 'Fecha de actualizacion',
+        ]);
+        
+
     }
 }

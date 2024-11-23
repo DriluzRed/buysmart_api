@@ -28,7 +28,7 @@ class CityCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\City::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/city');
-        CRUD::setEntityNameStrings('city', 'cities');
+        CRUD::setEntityNameStrings('ciudad', 'ciudades');
     }
 
     /**
@@ -39,12 +39,25 @@ class CityCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::addColumn([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+        ]);
+        CRUD::addColumn([
+            'name' => 'department_id',
+            'type' => 'select',
+            'label' => 'Departamento',
+            'attribute' => 'name',
+            'entity' => 'department',
+            'model' => \App\Models\Department::class,
+        ]);
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'population',
+            'type' => 'text',
+            'label' => 'Poblacion',
+        ]);
     }
 
     /**
@@ -56,12 +69,25 @@ class CityCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CityRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+        ]);
+        CRUD::addField([
+            'name' => 'department_id',
+            'type' => 'select',
+            'label' => 'Departamento',
+            'entity' => 'department',
+            'attribute' => 'name',
+            'model' => \App\Models\Department::class,
+        ]);
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'population',
+            'type' => 'number',
+            'label' => 'Poblacion',
+        ]);
     }
 
     /**

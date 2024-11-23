@@ -5,6 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Helper;
 
 class Order extends Model
 {
@@ -63,6 +64,11 @@ class Order extends Model
         ];
 
         return $statuses[$this->status] ?? $this->status;
+    }
+
+    public function getFormattedTotalAttribute()
+    {
+        return 'Gs ' . Helper::formatPrice($this->total);
     }
 
 }

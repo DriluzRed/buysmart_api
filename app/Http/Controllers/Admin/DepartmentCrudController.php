@@ -28,7 +28,7 @@ class DepartmentCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Department::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/department');
-        CRUD::setEntityNameStrings('department', 'departments');
+        CRUD::setEntityNameStrings('departmento', 'departmento  s');
     }
 
     /**
@@ -39,12 +39,16 @@ class DepartmentCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
-
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+        ]);
+        CRUD::addColumn([
+            'name' => 'capital',
+            'type' => 'text',
+            'label' => 'Capital',
+        ]);
     }
 
     /**
@@ -56,12 +60,16 @@ class DepartmentCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(DepartmentRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
-
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+        ]);
+        CRUD::addField([
+            'name' => 'capital',
+            'type' => 'text',
+            'label' => 'Capital',
+        ]);
     }
 
     /**

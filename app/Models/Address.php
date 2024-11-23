@@ -41,5 +41,15 @@ class Address extends Model
         return $this->belongsTo(Department::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function getFullAddressAttribute()
+    {
+        return "{$this->address_line_1} - {$this->address_line_2}, {$this->city->name}, {$this->department->name}";
+    }
+
     
 }

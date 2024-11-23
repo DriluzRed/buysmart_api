@@ -28,7 +28,7 @@ class BrandCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Brand::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/brand');
-        CRUD::setEntityNameStrings('brand', 'brands');
+        CRUD::setEntityNameStrings('marca', 'marcas');
     }
 
     /**
@@ -39,12 +39,24 @@ class BrandCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
-
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'logo',
+            'type' => 'image',
+            'label' => 'Logo',
+            'height' => '40px',
+            'width' => '40px',
+            'prefix' => 'storage/'
+        ]);
+        CRUD::addColumn([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+        ]);
+        CRUD::addColumn([
+            'name' => 'description',
+            'type' => 'text',
+            'label' => 'Descripcion',
+        ]);
     }
 
     /**
@@ -56,7 +68,26 @@ class BrandCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BrandRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        
+        CRUD::addField([
+            'name' => 'logo',
+            'type' => 'upload',
+            'label' => 'Logo',
+            'upload' => true,
+            'crop' => true,
+            'aspect_ratio' => 1,
+            'disk' => 'public',
+        ]);
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+        ]);
+        CRUD::addField([
+            'name' => 'slug',
+            'type' => 'text',
+            'label' => 'Slug',
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax:
