@@ -17,6 +17,22 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @vite('resources/sass/app.scss')
     @yield('styles')
+    <style>
+        /* Flexbox para asegurar que el footer quede al final */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Establece el cuerpo con altura mínima de la pantalla */
+        }
+
+        main {
+            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+        }
+
+        footer {
+            margin-top: auto; /* Empuja el footer hacia el fondo de la página */
+        }
+    </style>
 </head>
 
 <body>
@@ -25,7 +41,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="fas fa-store"></i> {{ config('app.name', 'Mi E-commerce') }}
+                <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

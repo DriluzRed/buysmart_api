@@ -15,6 +15,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     @vite('resources/sass/app.scss')
     @yield('styles')
+    <style>
+        /* Flexbox para asegurar que el footer quede al final */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Establece el cuerpo con altura mínima de la pantalla */
+        }
+
+        main {
+            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+        }
+
+        footer {
+            margin-top: auto; /* Empuja el footer hacia el fondo de la página */
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +39,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('img/buysmart-logo-texto-sin-fondo.png') }}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
+                <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

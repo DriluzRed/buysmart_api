@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Cache;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,11 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        view()->composer('*', function ($view) {
-            $categories = Category::with('subcategories')->get();
-            $view->with('categories', $categories);
-        });
-
+       
     }
 
     /**
@@ -26,5 +24,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+        view()->composer('*', function ($view) {
+            $categories = Category::with('subcategories')->get();
+            $config = Setting::all()->pluck('value', 'key')->toArray();
+            $view->with('categories', $categories)
+            ->with('config', $config);
+        });
+
     }
 }

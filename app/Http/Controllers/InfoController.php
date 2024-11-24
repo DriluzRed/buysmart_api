@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Helpers\Helper;
 class InfoController extends Controller
 {
     public function faq()
@@ -16,13 +17,15 @@ class InfoController extends Controller
     public function security()
     {
         $security = Setting::where('key', 'security')->first();
-        return view('frontend.info.security-policy')->with('security', $security->value);
+        $security = Helper::replaceVariables($security->value);
+        return view('frontend.info.security-policy')->with('security', $security);
     }
 
     public function terms()
     {
         $terms = Setting::where('key', 'terms')->first();
-        return view('frontend.info.terms-service')->with('terms', $terms->value);
+        $terms = Helper::replaceVariables($terms->value);
+        return view('frontend.info.terms-service')->with('terms', $terms);
     }
 
 }

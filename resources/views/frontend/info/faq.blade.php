@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h2 class="display-4 text-success">Preguntas Frecuentes</h2>
-            <p class="text-warning">Encuentra respuestas a las preguntas más comunes.</p>
+            <p>Encuentra respuestas a las preguntas más comunes.</p>
         </div>
 
         <div id="accordion">

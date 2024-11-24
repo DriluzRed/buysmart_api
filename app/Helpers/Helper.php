@@ -87,5 +87,21 @@ class Helper
     {
         return (Setting::where('key', 'delivery_cost')->first()->value);
     }
+
+    public static function replaceVariables($data){
+        $variables = [
+            '{empresa}' => env('ENTERPRISE', 'GoCommerce'),
+            '{contacto}' => env('CONTACT_EMAIL', 'soporte@goal.com'),
+            '{pais}' => env('COUNTRY', 'Paraguay'),
+        ];
+
+        return str_replace(array_keys($variables), array_values($variables), $data);
+    }
+
+    public static function getTermsAndConditions()
+    {
+        $terms = Setting::where('key', 'terms')->first();
+        return self::replaceVariables($terms->value);
+    }
     
 }
