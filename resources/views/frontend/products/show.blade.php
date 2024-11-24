@@ -35,7 +35,6 @@
             <!-- Columna de detalles del producto -->
             <div class="col-md-7">
                 <h1 class="display-4 text-primary">{{ $product->name }}</h1>
-                <p class="text-muted">Código: <strong>{{ $product->code }}</strong></p>
                 <p class="lead">{{ $product->description }}</p>
                 <p class="h4 text-dark">Gs. {{ \App\Helpers\Helper::formatPrice($product->price) }}</p>
 
