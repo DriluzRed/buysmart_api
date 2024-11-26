@@ -92,6 +92,12 @@ class CheckoutController extends Controller
                 'quantity' => 1,
                 'price' => $request->total - Helper::getDeliveryCost(),
             ];
+
+            // Reduce stock
+            $product = Product::find($request->product_id);
+            $product->stock->quantity -= 1;
+            $product->stock->save();
+
             $customer_mail = $order->customer->email;
             $data_for_mail = [
                 'order' => $order,
@@ -132,6 +138,11 @@ class CheckoutController extends Controller
                 'quantity' => $item->quantity,
                 'price' => $price,
             ];
+
+            // Reduce stock
+            $product = Product::find($item->product_id);
+            $product->stock->quantity -= $item->quantity;
+            $product->stock->save();
         }
         $customer_mail = $order->customer->email;
         $data_for_mail = [
