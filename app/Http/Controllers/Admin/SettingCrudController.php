@@ -44,6 +44,8 @@ class SettingCrudController extends CrudController
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
+        $this->crud->addButton('create', 'top', 'button', 'backpack::crud.buttons.create', 'beginning');
+       
     }
 
     /**

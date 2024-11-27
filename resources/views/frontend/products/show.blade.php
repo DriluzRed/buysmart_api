@@ -1,5 +1,6 @@
 @extends('frontend.layouts.app')
-
+@section('meta_title', $product->name . ' - ' . config('app.name'))
+@section('meta_description', $product->description)
 @section('content')
     <div class="container mt-5">
         <div class="row">

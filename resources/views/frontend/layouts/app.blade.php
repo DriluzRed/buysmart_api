@@ -5,7 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'BuySmart') }}</title>
+    <meta name="google-site-verification" content="Ko3v8eQe0g3IYMhDBRj2v4fT7XwSzv6W6prcEQtqvf4" />
+    <meta name="description" content="">
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@yield('meta_title', config('app.name'))" />
+    <meta property="og:description" content="@yield('meta_description', 'Productos a los mejores precios')" />
+    <title>@yield('meta_title', config('app.name'))</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
