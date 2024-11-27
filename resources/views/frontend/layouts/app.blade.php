@@ -10,7 +10,7 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@yield('meta_title', config('app.name'))" />
-    <meta property="og:description" content="@yield('meta_description', 'Productos a los mejores precios')" />
+    <meta property="og:description" content="@yield('meta_description', 'Explora la mejor selección de productos en Buysmart. Electrónica, electrodomésticos y más, con envío rápido en Paraguay.')">
     <title>@yield('meta_title', config('app.name'))</title>
 
     <!-- Bootstrap CSS -->
