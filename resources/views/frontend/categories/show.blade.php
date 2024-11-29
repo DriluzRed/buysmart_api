@@ -23,7 +23,7 @@
                             <select name="subcategory" class="form-select form-select-lg">
                                 <option value="">Mostrar todos</option>
                                 @foreach($category->subcategories as $subcategory)
-                                    <option value="{{ $subcategory->id }}" {{ request('subcategory') == $subcategory->id ? 'selected' : '' }}>{{ $subcategory->name }}</option>
+                                    <option value="{{ $subcategory->slug }}" {{ request('subcategory') == $subcategory->slug ? 'selected' : '' }}>{{ $subcategory->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,6 +34,17 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <input type="number" name="max_price" class="form-control form-control-lg" placeholder="Precio máximo" value="{{ request('max_price') }}">
+                        </div>
+                        <!-- Checkbox de nuevo -->
+                        <div class="col-md-1 mb-3 form-check">
+                            <input type="checkbox" name="is_new" class="form-check-input" id="is_new" {{ request('is_new') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_new">Nuevo</label>
+                        </div>
+
+                        <!-- Checkbox de oferta -->
+                        <div class="col-md-1 mb-3 form-check">
+                            <input type="checkbox" name="on_sale" class="form-check-input" id="on_sale" {{ request('on_sale') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="on_sale">En oferta</label>
                         </div>
         
                         <!-- Botón de búsqueda -->

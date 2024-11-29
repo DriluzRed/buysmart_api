@@ -26,3 +26,5 @@
     <x-backpack::menu-dropdown-item title="Clientes" icon="la la-question" :link="backpack_url('customer')" />
 </x-backpack::menu-dropdown>
 
+
+<x-backpack::menu-item title="Custom banners" icon="la la-question" :link="backpack_url('custom-banner')" />

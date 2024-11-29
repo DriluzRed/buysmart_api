@@ -17,31 +17,44 @@ class ProductController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
 
-        $query = Product::query();
+        try{
+            $query = Product::query();
 
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            if ($request->filled('search')) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            }
+    
+            if ($request->filled('category')) {
+                $query->where('category_id', $request->category);
+            }
+    
+            if ($request->filled('subcategory')) {
+                $query->where('sub_category_id', $request->subcategory);
+            }
+    
+            if ($request->filled('min_price')) {
+                $query->where('price', '>=', $request->min_price);
+            }
+    
+            if ($request->filled('max_price')) {
+                $query->where('price', '<=', $request->max_price);
+            }
+    
+            if($request->filled('is_new')) {
+                $query->where('is_new', 1);
+            }
+    
+            if($request->filled('on_sale')) {
+                $query->where('is_on_sale', 1);
+            }
+    
+            $products = $query->paginate(10);
+    
+            return view('frontend.products.index', compact('products', 'categories', 'subcategories'));
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Error al cargar los productos');
         }
-
-        if ($request->filled('category')) {
-            $query->where('category_id', $request->category);
-        }
-
-        if ($request->filled('subcategory')) {
-            $query->where('sub_category_id', $request->subcategory);
-        }
-
-        if ($request->filled('min_price')) {
-            $query->where('price', '>=', $request->min_price);
-        }
-
-        if ($request->filled('max_price')) {
-            $query->where('price', '<=', $request->max_price);
-        }
-
-        $products = $query->paginate(10);
-
-        return view('frontend.products.index', compact('products', 'categories', 'subcategories'));
+        
     }
 
     /**

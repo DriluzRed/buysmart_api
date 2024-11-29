@@ -62,6 +62,14 @@ class CategoryController extends Controller
                 $query->where('price', '<=', $request->max_price);
             }
 
+            if($request->filled('is_new')) {
+                $query->where('is_new', 1);
+            }
+
+            if($request->filled('on_sale')) {
+                $query->where('is_on_sale', 1);
+            }
+
             // Obtener los productos filtrados
             $products = $query->paginate(10);
             

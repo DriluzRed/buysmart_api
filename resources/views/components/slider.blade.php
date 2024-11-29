@@ -3,11 +3,7 @@
         @foreach ($images as $key => $image)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                 <img src="{{ asset('storage/'.$image->banner_image) }}" class="d-block w-100" alt="{{ $image->name }}" style="height: 400px; object-fit: cover;">
-                @if($image->name)
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $image->name }}</h5>
-                    </div>
-                @endif
+                <a href="{{ route('products.show', $image->slug) }}" class="stretched-link"></a>
             </div>
         @endforeach
     </div>
