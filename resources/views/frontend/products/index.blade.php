@@ -1,78 +1,78 @@
 @extends('frontend.layouts.app')
+@section('meta_title', 'Productos' . ' - ' . config('app.name'))
+@section('meta_description', 'Lista de todos los productos disponibles en la tienda')
 @section('content')
-    <div class="container mt-5">
-
-        <form action="{{ route('products.index') }}" method="GET">
-            <div class="row mb-4">
-
+    <div class="container">
+        <div class="row">
+            <form action="{{ route('products.index') }}" method="GET">
                 <!-- Campo de búsqueda -->
-
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <input type="text" name="search" class="form-control" placeholder="Buscar productos"
-                            value="{{ request('search') }}">
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-4">
+                        <input type="text" name="search" class="form-control" placeholder="Buscar productos" value="{{ request('search') }}">
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <select name="category" id="category" class="form-select ">
+                </div>
+        
+                <!-- Filtros -->
+                <div class="row mb-3">
+                    <!-- Categoría -->
+                    <div class="col-md-3">
+                        <select name="category" id="category" class="form-select">
                             <option value="">Seleccionar categoría</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}
+                                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-
+        
                     <!-- Subcategoría -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-3">
                         <select name="subcategory" id="subcategory" class="form-select">
                             <option value="">Debe seleccionar una categoría</option>
                         </select>
                     </div>
-                </div>
-                <!-- Categoría -->
-
-                <div class="row">
-                    <div class="col-md-2 mb-3">
-                        <input type="number" name="min_price" class="form-control" placeholder="Precio mínimo"
-                            value="{{ request('min_price') }}">
+        
+                    <!-- Precio mínimo -->
+                    <div class="col-md-2">
+                        <input type="number" name="min_price" id="min_price" class="form-control" placeholder="Precio mínimo" value="{{ request('min_price') }}">
                     </div>
-
+        
                     <!-- Precio máximo -->
-                    <div class="col-md-2 mb-3">
-                        <input type="number" name="max_price" class="form-control" placeholder="Precio máximo"
-                            value="{{ request('max_price') }}">
+                    <div class="col-md-2">
+                        <input type="number" name="max_price" id="max_price" class="form-control" placeholder="Precio máximo" value="{{ request('max_price') }}">
                     </div>
-                    <div class="col-md-4">
-                        <div class="col-6 col-md-2 mb-3 form-check d-flex align-items-center">
-                            <input type="checkbox" name="is_new" id="is_new" class="form-check-input"
-                                {{ request('is_new') ? 'checked' : '' }}>
-                            <label class="form-check-label ms-2" for="is_new">Nuevo</label>
-                        </div>
-    
-                        <!-- Checkbox de oferta -->
-                        <div class="col-6 col-md-2 mb-3 form-check d-flex align-items-center">
-                            <input type="checkbox" name="on_sale" id="on_sale" class="form-check-input"
-                                {{ request('on_sale') ? 'checked' : '' }}>
-                            <label class="form-check-label ms-2" for="on_sale">En oferta</label>
+                </div>
+        
+                <!-- Opciones adicionales -->
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input type="checkbox" name="is_new" class="form-check-input" id="is_new" {{ request('is_new') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_new">Nuevo</label>
                         </div>
                     </div>
-                    
+        
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input type="checkbox" name="on_sale" class="form-check-input" id="on_sale" {{ request('on_sale') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="on_sale">En oferta</label>
+                        </div>
+                    </div>
 
-                    <!-- Botón de búsqueda -->
-                    <div class="col-md-2 mb-3 d-flex align-items-center">
-                        <button type="submit" class="btn btn-primary">
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary-custom w-100">
                             <i class="fas fa-search"></i> Buscar
                         </button>
                     </div>
                 </div>
-                <!-- Precio mínimo -->
+            </form>
+        </div>
+        
 
-            </div>
-        </form>
-
-
-        <div class="row" id="product-container">
+        <div class="row mt-4 border" id="product-container">
             @if ($products->isNotEmpty())
                 @foreach ($products as $product)
                     @include('components.product-card', ['product' => $product])
@@ -85,6 +85,7 @@
                 </div>
             @endif
         </div>
+
         <!-- Paginación -->
         <div class="d-flex justify-content-center mt-5">
             {{ $products->links() }}

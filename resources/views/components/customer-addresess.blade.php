@@ -44,7 +44,7 @@
                 </table>
 
             </div>
-            <a href="#" class="btn btn-success mt-3" data-bs-toggle="modal"
+            <a href="#" class="btn btn-primary-custom mt-3" data-bs-toggle="modal"
                 data-bs-target="#addAddressModal">Añadir nueva dirección</a>
 
         </div>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="save-address">Guardar</button>
+                    <button type="button" class="btn btn-primary-custom" id="save-address">Guardar</button>
                 </div>
             </form>
         </div>
@@ -183,7 +183,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="update-address">Guardar cambios</button>
+                    <button type="button" class="btn btn-primary-custom" id="update-address">Guardar cambios</button>
                 </div>
             </form>
         </div>

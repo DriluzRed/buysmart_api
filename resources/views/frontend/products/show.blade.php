@@ -43,7 +43,7 @@
                     <p class="text-success"><strong>Disponible</strong></p>
                     <button class="btn btn-success btn-lg mt-3 add-to-cart" data-item-id="{{ $product->id }}"
                         data-item-name="{{ $product->name }}" data-item-price="{{ $product->price }}">Añadir al carrito</button>
-                    <button id="buyNow" class="btn btn-primary btn-lg mt-3">Comprar ahora</button>
+                    <button id="buyNow" class="btn btn-primary-custom btn-lg mt-3">Comprar ahora</button>
                 @else
                     <p class="text-danger"><strong>Agotado</strong></p>
                     <button class="btn btn-secondary btn-lg mt-3" disabled>Añadir al carrito</button>

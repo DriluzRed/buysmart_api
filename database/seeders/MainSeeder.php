@@ -223,16 +223,6 @@ class MainSeeder extends Seeder
             'phone ' => '12345678',
             'birthdate ' => '1990-01-01',
         ]);
-
-        \App\Models\Customer::create([
-            'name' => 'Customer',
-            'email' => 'customer@buysmart.com',
-            'phone' => '12345678',
-            'ci' => '11111111',
-            'ruc' => '11111111-1',
-            'birthdate' => '1990-01-01',
-            'password' => Hash::make('123456'),
-        ]);
     }
 
     

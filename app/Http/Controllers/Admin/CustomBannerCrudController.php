@@ -39,12 +39,26 @@ class CustomBannerCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        $this->crud->addColumn([
+            'name' => 'image',
+            'label' => 'Image',
+            'type' => 'image',
+            'prefix' => 'storage/', // Prefijo para las rutas de las imágenes
+            'height' => '50px',
+            'width' => '50px',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'title',
+            'label' => 'Titulo',
+            'type' => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'link',
+            'label' => 'Link',
+            'type' => 'text',
+        ]);
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+
     }
 
     /**
@@ -56,12 +70,32 @@ class CustomBannerCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CustomBannerRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        $this->crud->addField([
+            'name' => 'image',
+            'label' => 'Imagen del banner (tamaño 1920x500)',
+            'type'  => 'upload',
+            'upload' => true,
+            'disk' => 'public', 
+        ],);
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        $this->crud->addField([
+            'name' => 'title',
+            'label' => 'Titulo',
+            'type' => 'text',
+        ]);
+
+        $this->crud->addField([
+            'name' => 'link',
+            'label' => 'Link',
+            'type' => 'text',
+        ]);
+
+        $this->crud->addField([
+            'name' => 'description',
+            'label' => 'Descripción',
+            'type' => 'textarea',
+
+        ]);
     }
 
     /**

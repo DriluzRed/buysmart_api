@@ -15,7 +15,7 @@
 
                 <!-- Opciones para continuar -->
                 <div class="mt-4">
-                    <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg">Seguir comprando</a>
+                    <a href="{{ route('products.index') }}" class="btn btn-primary-custom btn-lg">Seguir comprando</a>
                     <a href="{{ route('customer.order.show',[$id]) }}" class="btn btn-outline-success btn-lg">Ver mi pedido</a>
                 </div>
             </div>

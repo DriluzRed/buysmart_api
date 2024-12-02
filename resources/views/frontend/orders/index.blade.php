@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h2 class="display-4 text-success">Mis Pedidos</h2>
-            <p class="text-warning">Aquí puedes revisar el historial de tus compras y su estado.</p>
+            <h4 class="">Aquí puedes revisar el historial de tus compras y su estado.</h4>
         </div>
 
         @if($orders->isEmpty())

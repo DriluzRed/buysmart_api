@@ -50,7 +50,7 @@
 
                     <!-- Botón de Procesar Pago -->
                     <div class="text-end mt-4">
-                        <button type="submit" class="btn btn-primary btn-lg">
+                        <button type="submit" class="btn btn-primary-custom btn-lg">
                             Procesar Pago
                         </button>
                     </div>

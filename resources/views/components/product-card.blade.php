@@ -44,7 +44,7 @@
 
         <div class="card-footer bg-light border-top-0 mt-auto">
             @if(isset($product->stock->quantity) && $product->stock->quantity > 0)
-                <button class="btn btn-primary w-100 add-to-cart" 
+                <button class="btn btn-primary-custom w-100 add-to-cart" 
                         data-item-id="{{ $product->id }}" 
                         data-item-name="{{ $product->name }}" 
                         data-item-price="{{ $product->sale_price < $product->price ? $product->sale_price : $product->price }}">

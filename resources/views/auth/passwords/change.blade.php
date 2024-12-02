@@ -38,7 +38,7 @@
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Cambiar Contraseña</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary-custom">Cambiar Contraseña</button>
                                 </div>
                             </div>
                         </div>

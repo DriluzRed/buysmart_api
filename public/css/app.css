@@ -52,3 +52,14 @@
 .product-card .card-footer {
     text-align: center;
 }
+
+.btn-primary-custom {
+    background-color: #F8B83D !important; /* Cambiar el color primario */
+    border-color: #F8B83D !important;
+    color: #fff !important;
+  }
+
+  .btn-primary-custom:hover {
+    background-color: #eda621 !important; /* Cambiar el color primario */
+    border-color: #eda621 !important;
+  }

@@ -105,7 +105,7 @@
 
                                 <!-- Submit Button -->
                                 <div class="col-md-12 d-grid">
-                                    <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                                    <button type="submit" class="btn btn-primary-custom btn-lg text-white">Registrarse</button>
                                 </div>
                             </div>
                         </form>

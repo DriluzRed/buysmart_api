@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group mb-0 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary w-100">
+                            <button type="submit" class="btn btn-primary-custom w-100">
                                 Restablecer Contraseña
                             </button>
                         </div>

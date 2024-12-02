@@ -34,7 +34,7 @@
                                 </label>
                             </div>
                             <div class="d-grid">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Iniciar Sesión</button>
+                                <button class="btn btn-primary-custom btn-lg btn-block" type="submit">Iniciar Sesión</button>
                             </div>
                             @if (Route::has('customer.password.request'))
                                 <div class="text-center mt-3">

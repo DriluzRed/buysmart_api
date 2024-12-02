@@ -1,9 +1,9 @@
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach ($images as $key => $image)
+        @foreach ($banners as $key => $banner)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                <img src="{{ asset('storage/'.$image->banner_image) }}" class="d-block w-100" alt="{{ $image->name }}" style="height: 400px; object-fit: cover;">
-                <a href="{{ route('products.show', $image->slug) }}" class="stretched-link"></a>
+                <img src="{{ asset('storage/'.$banner['image']) }}" class="d-block w-100" alt="Banner" style="height: 400px; object-fit: cover;">
+                <a href="{{ $banner['link'] }}" class="stretched-link"></a>
             </div>
         @endforeach
     </div>
