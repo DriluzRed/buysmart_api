@@ -218,7 +218,6 @@ class MainSeeder extends Seeder
             'email' => 'admin@buysmart.com',
             'password' => Hash::make('123456'),
             'role' => 'admin',
-            'active' => 1,
             'ci' => '11111111',
             'phone ' => '12345678',
             'birthdate ' => '1990-01-01',
