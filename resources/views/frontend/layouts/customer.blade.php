@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'BuySmart') }}</title>
-    <meta name="google-site-verification" content="Ko3v8eQe0g3IYMhDBRj2v4fT7XwSzv6W6prcEQtqvf4" />
+    <meta name="google-site-verification" content="VfE2Exk0Qv-E0UumKlb6y--26JNh4iyUdr6MSG2Ih5o" />
     <meta name="description" content="">
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
