@@ -63,7 +63,7 @@ return [
     'home_link' => 'admin',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo' => env('APP_LOGO', 'GoCommerce'),
+    'project_logo' => env('ENTERPRISE', 'BuySmart'),
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
 

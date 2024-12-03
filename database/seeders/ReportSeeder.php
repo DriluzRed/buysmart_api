@@ -40,8 +40,8 @@ class ReportSeeder extends Seeder
         ]);
 
         \App\Models\Report::create([
-            'name' => "Reporte de Productos mas vendidos',
-            'custom_query' => SELECT 
+            'name' => 'Reporte de Productos mas vendidos',
+            'custom_query' => "SELECT 
                 products.name AS Producto,
                 SUM(order_items.quantity) AS Cantidad_Vendida,
                 SUM(order_items.quantity * order_items.price) AS Total_Ingresos,
