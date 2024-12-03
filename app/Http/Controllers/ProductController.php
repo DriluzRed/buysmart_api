@@ -78,8 +78,19 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->first();
-        return view('frontend.products.show', compact('product'));
+   
+            $product = Product::where('slug', $slug)->first();
+            if (!$product) {
+                abort(404);
+            }
+            try {
+                return view('frontend.products.show', compact('product'));
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Error al cargar el producto');
+            }
+            
+
+        
     }
 
     /**

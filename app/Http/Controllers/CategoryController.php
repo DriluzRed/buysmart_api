@@ -37,11 +37,12 @@ class CategoryController extends Controller
      */
     public function show(Request $request, $slug)
     {
-        try {
-            // Obtener la categoría por el slug
             $category = Category::where('slug', $slug)->with('subcategories')->firstOrFail();
-
             // Obtener los productos de la categoría
+            if(!$category) {
+               abort(404);
+            }try {
+
             $query = Product::query();
             $query->where('category_id', $category->id);
 
@@ -75,7 +76,7 @@ class CategoryController extends Controller
             
             return view('frontend.categories.show', compact('category', 'products'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Error al cargar los productos de esta categoría');
         }
     }
 
