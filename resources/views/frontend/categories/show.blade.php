@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('meta_title', 'Categorias' . ' - ' . config('app.name'))
-@section('meta_description', 'Lista de todas las categorías disponibles en la tienda')
+@section('meta_description', 'Categorias dentro de Comercial San Rafael')
+
 @section('content')
     <div class="container">
         <div class="row">

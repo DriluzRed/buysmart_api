@@ -11,7 +11,7 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@yield('meta_title', config('app.name'))" />
-    <meta property="og:description" content="@yield('meta_description', 'Explora la mejor selección de productos en Buysmart. Electrónica, electrodomésticos y más, con envío rápido en Paraguay.')">
+    <meta property="og:description" content="@yield('meta_description', 'Explora la mejor selección de productos para electronica y el hogar en Comercial San Rafael.')">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
