@@ -102,3 +102,6 @@ Route::get('faq', [App\Http\Controllers\InfoController::class, 'faq'])->name('in
 
 //report routes
 Route::post('reports/', [App\Http\Controllers\ReportController::class, 'run'])->name('report.download');
+
+
+Route::get('/send-product-whatsapp/{id}', [App\Http\Controllers\ProductController::class, 'sendProductByWhatsApp'])->name('send.product.whatsapp');

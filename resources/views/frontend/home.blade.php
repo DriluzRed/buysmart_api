@@ -34,7 +34,7 @@
     </div>
     <!-- Paginación -->
     <div class="d-flex justify-content-center">
-        <a href="{{route('products.index')}}" class="btn btn-warning text-white">Ver todos los productos</a>
+        <a href="{{route('products.index')}}" class="btn btn-primary-custom text-white">Ver todos los productos</a>
     </div>
 </div>
 

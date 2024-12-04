@@ -6,7 +6,7 @@
                     <h5>Mis datos personales</h5>
                 </div>
                 <div class="col text-right">
-                    <btn class="btn btn-warning" id="edit-customer-data" onclick="openModal('{{$customer->id}}')"><i class="fas fa-pencil"></i></btn>
+                    <btn class="btn btn-primary-custom" id="edit-customer-data" onclick="openModal('{{$customer->id}}')"><i class="fas fa-pencil"></i></btn>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                         <input type="email" class="form-control" id="customer-email" name="email" value="{{$customer->email}}">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-primary-custom" id="update-data">Guardar cambios</button>
                     </div>
             </div>

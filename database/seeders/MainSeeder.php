@@ -70,7 +70,7 @@ class MainSeeder extends Seeder
             'name' => 'Politica de Seguridad',
             'value' => '<div class="container mt-5">
         <div class="text-center mb-5">
-            <h2 class="display-4 text-success">Política de Privacidad</h2>
+            <h2 class="display-4">Política de Privacidad</h2>
             <p class="text-muted">Entiende cómo protegemos tu información personal.</p>
         </div>
 
@@ -78,42 +78,42 @@ class MainSeeder extends Seeder
             <div class="col-md-12">
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
-                        <h4 class="card-title text-success">Introducción</h4>
+                        <h4 class="card-title">Introducción</h4>
                         <p class="card-text">
                             En {empresa}, valoramos y respetamos la privacidad de nuestros usuarios. Esta política explica cómo recogemos, usamos y protegemos la información personal que proporcionas al usar nuestros servicios.
                         </p>
 
-                        <h4 class="card-title text-success">¿Qué Información Recopilamos?</h4>
+                        <h4 class="card-title">¿Qué Información Recopilamos?</h4>
                         <p class="card-text">
                             Recopilamos información personal cuando te registras en nuestro sitio web, realizas un pedido, o interactúas con nuestro servicio de atención al cliente. Esta información puede incluir tu nombre, dirección, correo electrónico, número de teléfono y detalles de pago.
                         </p>
 
-                        <h4 class="card-title text-success">Uso de la Información</h4>
+                        <h4 class="card-title ">Uso de la Información</h4>
                         <p class="card-text">
                             Utilizamos la información personal para procesar tus pedidos, proporcionarte soporte, y mejorar nuestros servicios. También podemos utilizarla para enviarte actualizaciones sobre productos y ofertas, siempre y cuando nos des tu consentimiento.
                         </p>
 
-                        <h4 class="card-title text-success">Protección de la Información</h4>
+                        <h4 class="card-title ">Protección de la Información</h4>
                         <p class="card-text">
                             Implementamos medidas de seguridad razonables para proteger la información personal que recopila nuestra empresa. Sin embargo, ten en cuenta que ninguna transmisión de datos a través de Internet es 100% segura, por lo que no podemos garantizar la seguridad absoluta.
                         </p>
 
-                        <h4 class="card-title text-success">Compartir Información con Terceros</h4>
+                        <h4 class="card-title ">Compartir Información con Terceros</h4>
                         <p class="card-text">
                             No compartimos tu información personal con terceros sin tu consentimiento, salvo en situaciones específicas como procesadores de pagos y proveedores de servicios que nos ayudan a completar tu pedido.
                         </p>
 
-                        <h4 class="card-title text-success">Tus Derechos</h4>
+                        <h4 class="card-title ">Tus Derechos</h4>
                         <p class="card-text">
                             Tienes el derecho de acceder, corregir o eliminar la información personal que tenemos sobre ti. Si deseas ejercer estos derechos, por favor contáctanos.
                         </p>
 
-                        <h4 class="card-title text-success">Cambios a Esta Política</h4>
+                        <h4 class="card-title ">Cambios a Esta Política</h4>
                         <p class="card-text">
                             Nos reservamos el derecho de actualizar esta Política de Privacidad en cualquier momento. Te notificaremos de cualquier cambio mediante un aviso en nuestro sitio web.
                         </p>
 
-                        <h4 class="card-title text-success">Contacto</h4>
+                        <h4 class="card-title ">Contacto</h4>
                         <p class="card-text">
                             Si tienes alguna pregunta sobre nuestra Política de Privacidad, no dudes en contactarnos a través de {contacto}.
                         </p>
@@ -132,7 +132,7 @@ class MainSeeder extends Seeder
             'name' => 'Terminos de Servicio',
             'value' => '<div class="container mt-5">
         <div class="text-center mb-5">
-            <h2 class="display-4 text-warning">Términos de Servicio</h2>
+            <h2 class="display-4 ">Términos de Servicio</h2>
             <p class="text-muted">Lee nuestros términos y condiciones para usar nuestros servicios.</p>
         </div>
 
@@ -140,52 +140,52 @@ class MainSeeder extends Seeder
             <div class="col-md-12">
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
-                        <h4 class="card-title text-warning">Introducción</h4>
+                        <h4 class="card-title ">Introducción</h4>
                         <p class="card-text">
                             Al acceder y usar nuestros servicios, aceptas cumplir con estos Términos de Servicio. Si no estás de acuerdo con estos términos, no utilices nuestros servicios.
                         </p>
 
-                        <h4 class="card-title text-warning">Uso del Sitio Web</h4>
+                        <h4 class="card-title ">Uso del Sitio Web</h4>
                         <p class="card-text">
                             El acceso a nuestro sitio web es para fines legales. No debes utilizar este sitio de manera que pueda dañar o interrumpir su funcionamiento. Nos reservamos el derecho de modificar o suspender el servicio en cualquier momento.
                         </p>
 
-                        <h4 class="card-title text-warning">Registro de Cuenta</h4>
+                        <h4 class="card-title ">Registro de Cuenta</h4>
                         <p class="card-text">
                             Para acceder a ciertas funciones, como realizar compras, deberás registrarte en nuestro sitio y proporcionar información precisa y actualizada. Eres responsable de mantener la seguridad de tu cuenta.
                         </p>
 
-                        <h4 class="card-title text-warning">Pedidos y Pagos</h4>
+                        <h4 class="card-title ">Pedidos y Pagos</h4>
                         <p class="card-text">
                             Al realizar un pedido, aceptas pagar el precio total de los productos, más los costos de envío y cualquier impuesto aplicable. Todos los pagos se procesan de forma segura a través de nuestros proveedores de pago.
                         </p>
 
-                        <h4 class="card-title text-warning">Devoluciones y Reembolsos</h4>
+                        <h4 class="card-title ">Devoluciones y Reembolsos</h4>
                         <p class="card-text">
                             Ofrecemos devoluciones de productos dentro de un plazo de 30 días después de la compra. Los productos deben estar en su estado original. Para más detalles, consulta nuestra política de devoluciones.
                         </p>
 
-                        <h4 class="card-title text-warning">Propiedad Intelectual</h4>
+                        <h4 class="card-title ">Propiedad Intelectual</h4>
                         <p class="card-text">
                             Todos los derechos de propiedad intelectual relacionados con el contenido de nuestro sitio web, incluidos los textos, imágenes y logotipos, son propiedad exclusiva de {empresa}. No se permite su reproducción sin nuestro permiso.
                         </p>
 
-                        <h4 class="card-title text-warning">Limitación de Responsabilidad</h4>
+                        <h4 class="card-title ">Limitación de Responsabilidad</h4>
                         <p class="card-text">
                             {empresa}, no será responsable por cualquier daño directo, indirecto, incidental o consecuente que surja del uso de nuestros servicios, incluido el acceso o uso del sitio web, productos, o la incapacidad de usarlo.
                         </p>
 
-                        <h4 class="card-title text-warning">Modificaciones a los Términos</h4>
+                        <h4 class="card-title ">Modificaciones a los Términos</h4>
                         <p class="card-text">
                             Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento. Te notificaremos sobre cambios importantes mediante un aviso en el sitio web. Es tu responsabilidad revisar los términos periódicamente.
                         </p>
 
-                        <h4 class="card-title text-warning">Ley Aplicable</h4>
+                        <h4 class="card-title ">Ley Aplicable</h4>
                         <p class="card-text">
                             Estos Términos de Servicio se rigen por las leyes de {pais}. Cualquier disputa relacionada con el uso de nuestros servicios se resolverá en los tribunales competentes de {pais}.
                         </p>
 
-                        <h4 class="card-title text-warning">Contacto</h4>
+                        <h4 class="card-title ">Contacto</h4>
                         <p class="card-text">
                             Si tienes alguna pregunta sobre estos Términos de Servicio, no dudes en ponerte en contacto con nosotros a través de {contacto}.
                         </p>

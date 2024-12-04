@@ -8,7 +8,7 @@
         </div>
 
         <div class="row">
-        
+
             <!-- Formulario de Envío y Pago -->
             <div class="col-md-8">
                 <form action="{{ route('checkout.process') }}" id="checkout-form" method="POST">
@@ -51,9 +51,15 @@
 
                     <!-- Botón de Procesar Pago -->
                     <div class="text-end mt-4">
+                        @if (env('PLAN') == 'basic')
                         <button type="submit" class="btn btn-primary-custom btn-lg">
-                            Procesar Pago
+                            <i class="fa-brands fa-whatsapp"></i> Generar orden y enviar por WhatsApp
                         </button>
+                        @else
+                            <button type="submit" class="btn btn-primary-custom btn-lg">
+                                Procesar Pago
+                            </button>
+                        @endif
                     </div>
                 </form>
             </div>
@@ -67,10 +73,12 @@
                         <div class="border-bottom mb-3 pb-2">
                             <p class="mb-1"><strong>Producto:</strong> {{ $item['name'] }}</p>
                             <p class="mb-1"><strong>Cantidad:</strong> {{ $item['quantity'] }}</p>
-                            <p class="mb-1"><strong>Precio Unitario:</strong> Gs. {{ \App\Helpers\Helper::formatPrice($item['price']) }}</p>
+                            <p class="mb-1"><strong>Precio Unitario:</strong> Gs.
+                                {{ \App\Helpers\Helper::formatPrice($item['price']) }}</p>
                         </div>
                     @endforeach
-                    <p><strong>Delivery:</strong> Gs. {{ \App\Helpers\Helper::formatPrice(\App\Helpers\Helper::getDeliveryCost())}}</p>
+                    <p><strong>Delivery:</strong> Gs.
+                        {{ \App\Helpers\Helper::formatPrice(\App\Helpers\Helper::getDeliveryCost()) }}</p>
                     <h5 class="mt-3">Total: <strong>Gs. {{ \App\Helpers\Helper::formatPrice($total) }}</strong></h5>
                 </div>
             </div>
@@ -96,7 +104,13 @@
                                 title: '¡Pedido realizado con éxito!',
                                 text: 'Tu pedido ha sido colocado con éxito. ¡Gracias por comprar con nosotros!'
                             }).then(function() {
-                                window.location.href = data.redirect_url;
+                                if(data.type === 'whatsapp') {
+                                    window.open(data.redirect_url, '_blank');
+                                    window.location.href = '{{ route('products.index') }}';
+                                }
+                                else {
+                                    window.location.href = data.redirect_url;
+                                }
                             });
                         } else {
                             Swal.fire({

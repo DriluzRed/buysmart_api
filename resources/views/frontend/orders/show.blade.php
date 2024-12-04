@@ -8,14 +8,14 @@
 
                 <!-- Información básica del pedido -->
                 <div class="card mb-4">
-                    <div class="card-header bg-success text-white">
+                    <div class="card-header bg-success-custom text-white">
                         <h5 class="mb-0">Pedido #{{ $order->id }}</h5>
                         <small>Fecha: {{ $order->created_at->format('d/m/Y H:i') }}</small>
                     </div>
                     <div class="card-body">
                         <p><strong>Estado del pedido:</strong> 
                             <span class="badge 
-                                {{ $order->status_translated === 'completado' ? 'bg-success' : 'bg-warning text-dark' }}">
+                                {{ $order->status_translated === 'completado' ? 'bg-success text-dark' : 'bg-warning text-dark' }}">
                                 {{ ucfirst($order->status_translated) }}
                             </span>
                         </p>
@@ -28,7 +28,7 @@
 
                 <!-- Detalles de los productos -->
                 <div class="card mb-4">
-                    <div class="card-header bg-secondary text-white">
+                    <div class="card-header bg-success-custom text-white">
                         <h5 class="mb-0">Productos</h5>
                     </div>
                     <div class="card-body">
@@ -56,8 +56,8 @@
 
                 <!-- Botón de continuar comprando -->
                 <div class="text-center">
-                    <a href="{{ route('products.index') }}" class="btn btn-success btn-lg">Seguir Comprando</a>
-                    <a href="{{ route('customer.orders') }}" class="btn btn-warning btn-lg text-white">Ver mis pedidos</a>
+                    <a href="{{ route('customer.orders') }}" class="btn btn-danger btn-lg text-white">Ver mis pedidos</a>
+                    <a href="{{ route('products.index') }}" class="btn btn-primary-custom btn-lg">Seguir Comprando</a>
                 </div>
             </div>
         </div>

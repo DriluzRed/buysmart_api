@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">Cerrar</button>
-                <a href="{{ route('checkout') }}" class="btn btn-success">Proceder al pago</a>
+                <a href="{{ route('checkout') }}" class="btn btn-primary-custom">Proceder al pago</a>
             </div>
         </div>
     </div>

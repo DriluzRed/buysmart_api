@@ -24,6 +24,12 @@ class Helper
         ];
     }
 
+    public static function getConfigurations()
+    {
+        $configurations = Setting::all()->pluck('value', 'key');
+        return $configurations;
+    }
+
     public static function formatPrice($price)
     {
         return number_format($price, 0, ',', '.');
@@ -102,6 +108,11 @@ class Helper
     {
         $terms = Setting::where('key', 'terms')->first();
         return self::replaceVariables($terms->value);
+    }
+
+    public static function sendCartViaWhatsApp($data)
+    {
+        
     }
     
 }

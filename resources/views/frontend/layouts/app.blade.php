@@ -83,7 +83,7 @@
                         <form class="d-flex position-relative" action="" method="GET" id="search-form">
                             <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
                                 id="search-input" autocomplete="off">
-                            <button class="btn btn-outline-success" type="submit">
+                            <button class="btn btn-outline-success-custom" type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                             <div class="dropdown-menu" id="search-results"

@@ -127,4 +127,5 @@ class ProductController extends Controller
         return view('components.search-products', compact('products'));
     }
 
+
 }

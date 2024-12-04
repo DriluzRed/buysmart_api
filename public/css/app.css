@@ -16,8 +16,8 @@
 
 /* Efecto de hover en la categoría */
 .dropdown-submenu:hover > .dropdown-item {
-    background-color: #f8f9fa; 
-    color: #343a40; 
+    background-color: #f8f9fa;
+    color: #343a40;
 }
 
 @media (max-width: 768px) {
@@ -54,12 +54,30 @@
 }
 
 .btn-primary-custom {
-    background-color: #F8B83D !important; /* Cambiar el color primario */
-    border-color: #F8B83D !important;
+    background-color: #163050 !important; /* Cambiar el color primario */
+    border-color: #163050 !important;
     color: #fff !important;
-  }
+}
 
-  .btn-primary-custom:hover {
-    background-color: #eda621 !important; /* Cambiar el color primario */
-    border-color: #eda621 !important;
-  }
+.btn-primary-custom:hover {
+    background-color: #1e4f8a !important; /* Cambiar el color primario */
+    border-color: #163050 !important;
+}
+
+.btn-outline-success-custom {
+    color: #1e4f8a !important;
+    border-color: #163050 !important;
+}
+
+.btn-outline-success-custom:hover {
+    background-color: #1e4f8a !important;
+    color: #fff !important;
+}
+
+.bg-primary-custom {
+    background-color: #163050 !important; /* Cambiar el color primario */
+}
+
+.bg-success-custom {
+    background-color: #044798 !important;
+}

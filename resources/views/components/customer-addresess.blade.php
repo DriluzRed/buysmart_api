@@ -25,7 +25,7 @@
                                 <td>{{ $address->department->name }}</td>
                                 <td>{{ $address->neighborhood?->name ?? 'Sin barrio' }}</td>
                                 <td>
-                                    <a href="#" class="btn edit-address btn-warning" data-id="{{ $address->id }}"
+                                    <a href="#" class="btn edit-address btn-primary-custom" data-id="{{ $address->id }}"
                                         data-customer-id="{{ $address->customer_id }}"
                                         data-neighborhood-id="{{ $address->neighborhood_id }}"
                                         data-city-id="{{ $address->city_id }}"
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary-custom" id="save-address">Guardar</button>
                 </div>
             </form>
@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary-custom" id="update-address">Guardar cambios</button>
                 </div>
             </form>

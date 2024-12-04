@@ -50,9 +50,15 @@
 
                     <!-- Botón de Procesar Pago -->
                     <div class="text-end mt-4">
+                        @if (env('PLAN') == 'basic')
                         <button type="submit" class="btn btn-primary-custom btn-lg">
-                            Procesar Pago
+                            <i class="fa-brands fa-whatsapp"></i> Generar orden y enviar por WhatsApp
                         </button>
+                        @else
+                            <button type="submit" class="btn btn-primary-custom btn-lg">
+                                Procesar Pago
+                            </button>
+                        @endif
                     </div>
                 </form>
             </div>
@@ -94,7 +100,13 @@
                                 title: '¡Pedido realizado con éxito!',
                                 text: 'Tu pedido ha sido colocado con éxito. ¡Gracias por comprar con nosotros!'
                             }).then(function() {
-                                window.location.href = data.redirect_url;
+                                if(data.type === 'whatsapp') {
+                                    window.open(data.redirect_url, '_blank');
+                                    window.location.href = '{{ route('products.index') }}';
+                                }
+                                else {
+                                    window.location.href = data.redirect_url;
+                                }
                             });
                         } else {
                             Swal.fire({

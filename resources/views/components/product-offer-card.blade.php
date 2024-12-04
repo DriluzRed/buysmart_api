@@ -8,17 +8,17 @@
 
         <a href="{{ route('products.show', $product->slug) }}" class="stretched-link text-decoration-none flex-grow-1">
             @if($product->is_new)
-            <span class="badge bg-primary position-absolute m-2 p-2">Nuevo</span>
+            <span class="badge bg-primary-custom position-absolute m-2 p-2">Nuevo</span>
             @endif
             @if($product->is_on_sale)
                 @if($product->is_new)
-                    <span class="badge bg-primary position-absolute m-2 p-2">Nuevo</span>
+                    <span class="badge bg-primary-custom position-absolute m-2 p-2">Nuevo</span>
                 @endif
                 @if($product->sale_price < $product->price)
                     @php
                         $discountPercentage = round((($product->price - $product->sale_price) / $product->price) * 100);
                     @endphp
-                    <span class="badge bg-warning position-absolute m-2 p-2" style="right: 0;">{{ $discountPercentage }}% OFF</span>
+                    <span class="badge bg-danger position-absolute m-2 p-2" style="right: 0;">{{ $discountPercentage }}% OFF</span>
                 @endif
             @endif
             <img src="{{ asset(file_exists(public_path($imagePath)) ? $imagePath : $defaultImage) }}" class="card-img-top img-fluid" alt="{{ $product->name }}" style="object-fit: cover; height: 200px;">

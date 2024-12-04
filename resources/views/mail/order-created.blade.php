@@ -23,7 +23,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #4CAF50;
+            color: #163050
         }
         h2 {
             color: #333;
@@ -48,14 +48,14 @@
         .total {
             font-size: 18px;
             font-weight: bold;
-            color: #4CAF50;
+            color: #163050;
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="{{asset('img/buysmart-logo-texto-sin-fondo.png')}}" alt="Logo" class="logo">
+        <img src="{{asset('img/logo_navbar.png')}}" alt="Logo" class="logo">
         <h1>¡Gracias por tu compra!</h1>
         <p>Tu pedido ha sido confirmado exitosamente.</p>
         <h2>Detalles del Pedido</h2>

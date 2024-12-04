@@ -3,14 +3,14 @@
 @section('content')
     <div class="container mt-5">
         <div class="text-center mb-5">
-            <h2 class="display-4 text-success">Preguntas Frecuentes</h2>
+            <h2 class="display-4">Preguntas Frecuentes</h2>
             <p>Encuentra respuestas a las preguntas más comunes.</p>
         </div>
 
         <div id="accordion">
             @foreach ($faqs as $index => $faq)
                 <div class="card mb-3 border-0 shadow-sm">
-                    <div class="card-header bg-success text-white" id="heading{{ $index }}">
+                    <div class="card-header bg-primary-custom text-white" id="heading{{ $index }}">
                         <h5 class="mb-0">
                             <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapse{{ $index }}" 
                                 aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapse{{ $index }}">

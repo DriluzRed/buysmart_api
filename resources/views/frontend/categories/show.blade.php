@@ -19,7 +19,7 @@
                             <select name="subcategory" id="subcategory" class="form-select">
                                 <option value="">Mostrar todos</option>
                                 @foreach($category->subcategories as $subcategory)
-                                    <option value="{{ $subcategory->slug }}" {{ request('subcategory') == $subcategory->slug ? 'selected' : '' }}>
+                                    <option value="{{ $subcategory->id }}" {{ request('subcategory') == $subcategory->id ? 'selected' : '' }}>
                                         {{ $subcategory->name }}
                                     </option>
                                 @endforeach
