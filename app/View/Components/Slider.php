@@ -18,10 +18,10 @@ class Slider extends Component
         $customBanners = CustomBanner::getAllBanners();
 
         // Combinar los resultados
-        $banners = $productBanners->merge($customBanners);
+        $productBanners = $productBanners ?? collect();
+        $customBanners = $customBanners ?? collect();
 
-        // Ordenar por orden
-        $banners = $banners->sortBy('order');
+        $banners = $productBanners->merge($customBanners);
 
         $this->banners = $banners;
 

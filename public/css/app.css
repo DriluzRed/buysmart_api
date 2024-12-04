@@ -63,3 +63,20 @@
     background-color: #eda621 !important; /* Cambiar el color primario */
     border-color: #eda621 !important;
   }
+
+  .carousel-item img {
+    object-fit: cover;
+    height: 400px; /* Altura para pantallas grandes */
+}
+
+@media (max-width: 768px) {
+    .carousel-item img  {
+        height: 15%0px !important; /* Altura para pantallas móviles */
+    }
+}
+.text-green {
+    font-weight: bold;
+    color: #3abd91;
+}
+
+

@@ -25,6 +25,7 @@
     <link rel="shortcut icon" href="favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
     <link rel="manifest" href="favicon/site.webmanifest" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite('resources/sass/app.scss')
     @yield('styles')
     <style>
@@ -42,13 +43,27 @@
         footer {
             margin-top: auto; /* Empuja el footer hacia el fondo de la página */
         }
+        .navbar-nav .nav-link {
+            transition: color 0.3s, background-color 0.3s;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #3abd91; 
+        }
+        .dropdown-menu .dropdown-item {
+        transition: background-color 0.3s, color 0.3s;
+        }
+        .dropdown-menu .dropdown-item:hover {
+            color: #3abd91;
+        }
+        
     </style>
 </head>
 
 <body>
 
     <!-- Header / Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
@@ -74,23 +89,17 @@
                             <a class="dropdown-item" href="{{ route('products.index') }}"><i class="fas fa-boxes"></i> Todos los productos</a>
                             <hr>
                             @foreach ($categories as $category)
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#" id="submenu-{{ $category->id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-tag"></i> {{ $category->name }}
-                                    </a>
-                                    @if ($category->subcategories->isNotEmpty())
-                                        <ul class="dropdown-menu" aria-labelledby="submenu-{{ $category->id }}">
-                                            @foreach ($category->subcategories as $subcategory)
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ route('subcategories.show', $subcategory->slug) }}"><i class="fas fa-tags"></i> {{ $subcategory->name }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
+                                <a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">
+                                    <i class="fas fa-box
+                                    "></i> {{ $category->name }}
+                                </a>
                             @endforeach
                         </ul>
-                    </li>
+                    </li>    
+                </ul>
+
+                <!-- Buscador -->
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <form class="d-flex position-relative" action="" method="GET" id="search-form">
                             <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
@@ -163,26 +172,26 @@
     
 
     <!-- Footer -->
-    <footer class="bg-light py-4 mt-auto">
+    <footer class="bg-white text-white py-4 mt-auto">
+
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-left">
-                    <h5>{{ config('app.name', 'Mi E-commerce') }}</h5>
-                    <p>© {{ date('Y') }} Todos los derechos reservados.</p>
+                    <h5 class="text-green">{{ config('app.name', 'Mi E-commerce') }}</h5>
+                    <p class="text-dark">© {{ date('Y') }} Desarrollado por <a href="https://goalsoluciones.com/" target="_blank" class="text-decoration-none">GOAL</a> <br>Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-4 text-center">
-                    <h5>Enlaces útiles</h5>
+                    <h5 class="text-green">Enlaces útiles</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('info.faq') }}">Preguntas Frecuentes</a></li>
-                        <li><a href="{{ route('info.security-policy') }}">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}">Términos de Servicio</a></li>
+                        <li><a href="{{ route('info.faq') }}" class="text-dark text-decoration-none">Preguntas Frecuentes</a></li>
+                        <li><a href="{{ route('info.security-policy') }}" class="text-dark text-decoration-none">Política de Privacidad</a></li>
+                        <li><a href="{{ route('info.service-terms') }}" class="text-dark text-decoration-none">Términos de Servicio</a></li>
                     </ul>
+                    
                 </div>
-                <div class="col-md-4 text-center text-md-right">
+                <div class="col-md-4 text-center text-green text-md-right">
                     <h5>Síguenos</h5>
-                    <a href="https://www.facebook.com" class="text-dark mr-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" class="text-dark mr-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/buysmartpy/" class="text-dark"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

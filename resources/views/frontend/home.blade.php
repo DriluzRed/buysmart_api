@@ -1,20 +1,13 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-<style>
-    .text-center {
-        font-weight: bold;
-        color: #3abd91;
-    }
-
-</style>
 
 <!-- Offers Section -->
 <div class="container-fluid mt-5">
     <x-slider />
 </div>
 <div class="container mt-5">
-    <h2 class="text-center">Ofertas destacadas</h2>
+    <h2 class="text-center text-green">Ofertas destacadas</h2>
     <div class="row">
         @if($offers->isNotEmpty())
         <div class="row">
@@ -24,10 +17,10 @@
         </div>
 
         @else
-            <p class="text-center">No hay ofertas disponibles en este momento.</p>
+            <p class="text-center text-green">No hay ofertas disponibles en este momento.</p>
         @endif
     </div>
-    <h2 class="text-center">Nuevos Productos</h2>
+    <h2 class="text-center text-green">Nuevos Productos</h2>
     <div class="row">
         @if($products->isNotEmpty())
         <div class="row">
@@ -36,7 +29,7 @@
             @endforeach
         </div>
         @else
-            <p class="text-center">No hay productos disponibles en este momento.</p>
+            <p class="text-center text-green">No hay productos disponibles en este momento.</p>
         @endif
     </div>
     <!-- Paginación -->

@@ -25,6 +25,9 @@
                 <h5 class="card-title text-dark mb-2">{{ $product->name }}</h5>
                 <p class="card-text text-muted small mb-3">{{ Str::limit($product->description, 60) }}</p>
                 @if(isset($product->stock->quantity) && $product->stock->quantity > 0)
+                    @if(isset($product->stock->alert_quantity) && $product->stock->quantity <= $product->stock->alert_quantity)
+                        <p class="text-danger card-text">Solo quedan {{$product->stock->quantity}} disponibles</p>
+                    @endif
                     <p class="card-text text-success fw-bold">Disponible</p>
                 @else
                     <p class="card-text text-danger fw-bold">Agotado</p>

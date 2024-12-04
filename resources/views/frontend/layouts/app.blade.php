@@ -158,28 +158,26 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-auto">
+    <footer class="bg-white text-white py-4 mt-auto">
 
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-left">
-                    <h5>{{ config('app.name', 'Mi E-commerce') }}</h5>
-                    <p>© {{ date('Y') }} Desarrollado por <a href="https://goalsoluciones.com/" target="_blank" class="text-decoration-none text-primary">GOAL</a> <br>Todos los derechos reservados.</p>
+                    <h5 class="text-green">{{ config('app.name', 'Mi E-commerce') }}</h5>
+                    <p class="text-dark">© {{ date('Y') }} Desarrollado por <a href="https://goalsoluciones.com/" target="_blank" class="text-decoration-none">GOAL</a> <br>Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-4 text-center">
-                    <h5>Enlaces útiles</h5>
+                    <h5 class="text-green">Enlaces útiles</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('info.faq') }}" class="text-white text-decoration-none">Preguntas Frecuentes</a></li>
-                        <li><a href="{{ route('info.security-policy') }}" class="text-white text-decoration-none">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}" class="text-white text-decoration-none">Términos de Servicio</a></li>
+                        <li><a href="{{ route('info.faq') }}" class="text-dark text-decoration-none">Preguntas Frecuentes</a></li>
+                        <li><a href="{{ route('info.security-policy') }}" class="text-dark text-decoration-none">Política de Privacidad</a></li>
+                        <li><a href="{{ route('info.service-terms') }}" class="text-dark text-decoration-none">Términos de Servicio</a></li>
                     </ul>
                     
                 </div>
-                <div class="col-md-4 text-center text-md-right">
+                <div class="col-md-4 text-center text-green text-md-right">
                     <h5>Síguenos</h5>
-                    <a href="https://www.facebook.com" class="text-white mr-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" class="text-white mr-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/buysmartpy/" class="text-white"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/buysmartpy/" class="text-dark"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

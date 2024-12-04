@@ -30,17 +30,19 @@ class CustomBanner extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public static function getAllBanners()
+    public static function getAllBanners() : \Illuminate\Support\Collection
     {
-        return self::where('image', '!=', null)
+        $banners = self::where('image', '!=', null)
         ->get()
         ->map(function ($banner) {
-            return [
+            return (object) [
                 'id' => $banner->id,
                 'image' => $banner->image,
                 'link' => $banner->link,
             ];
         });
+
+        return $banners->isEmpty() ? collect() : $banners;
     }
     public function setImageAttribute($value)
     {
