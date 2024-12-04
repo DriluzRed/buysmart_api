@@ -215,7 +215,7 @@ class MainSeeder extends Seeder
 
         \App\Models\User::create([
             'name' => 'Admin',
-            'email' => 'admin@buysmart.com',
+            'email' => 'admin@csr.com',
             'password' => Hash::make('123456'),
             'role' => 'admin',
             'ci' => '11111111',

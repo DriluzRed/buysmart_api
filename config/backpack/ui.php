@@ -46,7 +46,7 @@ return [
     // ----
 
     // Project name - shown in the window title
-    'project_name' => 'BuySmart - Admin Panel',
+    'project_name' => 'CSR - Admin Panel',
 
     // Content of the HTML meta robots tag to prevent indexing and link following
     'meta_robots_content' => 'noindex, nofollow',
@@ -63,7 +63,7 @@ return [
     'home_link' => 'admin',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo' => env('ENTERPRISE', 'BuySmart'),
+    'project_logo' => env('ENTERPRISE', 'Comercial San Rafael'),
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
 
