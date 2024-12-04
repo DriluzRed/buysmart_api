@@ -29,13 +29,20 @@ class MainSeeder extends Seeder
             'field' => 'auth_logo',
             'active' => 1,
         ]);
-        \App\Models\Setting::create
-        ([
+        \App\Models\Setting::create([
             'key' => 'navbar_logo',
             'name' => 'Logo del Navbar',
             'value' => '/img/logo_navbar.png',
             'description' => null,
             'field' => 'logo',
+            'active' => 1,
+        ]);
+        \App\Models\Setting::create([
+            'key' => 'whatsapp-number',
+            'name' => 'numero de whatsapp',
+            'value' => '595971681667',
+            'description' => null,
+            'field' => 'whatsapp',
             'active' => 1,
         ]);
 
