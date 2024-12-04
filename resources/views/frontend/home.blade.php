@@ -1,6 +1,13 @@
 @extends('frontend.layouts.app')
 
 @section('content')
+<style>
+    .text-center {
+        font-weight: bold;
+        color: #3abd91;
+    }
+
+</style>
 
 <!-- Offers Section -->
 <div class="container-fluid mt-5">

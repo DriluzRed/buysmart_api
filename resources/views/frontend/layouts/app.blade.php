@@ -40,13 +40,27 @@
         footer {
             margin-top: auto; /* Empuja el footer hacia el fondo de la página */
         }
+        .navbar-nav .nav-link {
+            transition: color 0.3s, background-color 0.3s;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #3abd91; 
+        }
+        .dropdown-menu .dropdown-item {
+        transition: background-color 0.3s, color 0.3s;
+        }
+        .dropdown-menu .dropdown-item:hover {
+            color: #3abd91;
+        }
+        
     </style>
 </head>
 
 <body>
 
     <!-- Header / Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
@@ -78,7 +92,11 @@
                                 </a>
                             @endforeach
                         </ul>
-                    </li>
+                    </li>    
+                </ul>
+
+                <!-- Buscador -->
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <form class="d-flex position-relative" action="" method="GET" id="search-form">
                             <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
@@ -140,27 +158,28 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-light py-4 mt-auto">
+    <footer class="bg-dark text-white py-4 mt-auto">
+
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-md-left">
                     <h5>{{ config('app.name', 'Mi E-commerce') }}</h5>
-                    <p>© {{ date('Y') }} Todos los derechos reservados.</p>
+                    <p>© {{ date('Y') }} Desarrollado por <a href="https://goalsoluciones.com/" target="_blank" class="text-decoration-none text-primary">GOAL</a> <br>Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-4 text-center">
                     <h5>Enlaces útiles</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('info.faq') }}" class="text-black text-decoration-none">Preguntas Frecuentes</a></li>
-                        <li><a href="{{ route('info.security-policy') }}" class="text-black text-decoration-none">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}" class="text-black text-decoration-none">Términos de Servicio</a></li>
+                        <li><a href="{{ route('info.faq') }}" class="text-white text-decoration-none">Preguntas Frecuentes</a></li>
+                        <li><a href="{{ route('info.security-policy') }}" class="text-white text-decoration-none">Política de Privacidad</a></li>
+                        <li><a href="{{ route('info.service-terms') }}" class="text-white text-decoration-none">Términos de Servicio</a></li>
                     </ul>
                     
                 </div>
                 <div class="col-md-4 text-center text-md-right">
                     <h5>Síguenos</h5>
-                    <a href="https://www.facebook.com" class="text-dark mr-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" class="text-dark mr-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com" class="text-white mr-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.twitter.com" class="text-white mr-2"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/buysmartpy/" class="text-white"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
