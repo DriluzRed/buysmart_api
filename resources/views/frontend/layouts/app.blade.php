@@ -97,11 +97,11 @@
 
                 <!-- Buscador -->
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <form class="d-flex position-relative" action="" method="GET" id="search-form">
+                    <li class="nav-item d-none d-lg-block ms-4">
+                        <form class="d-flex position-relative w-100" action="" method="GET" id="search-form">
                             <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
                                 id="search-input" autocomplete="off">
-                            <button class="btn btn-outline-success" type="submit">
+                            <button class="btn btn-outline-success-custom " type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                             <div class="dropdown-menu" id="search-results"
@@ -218,6 +218,25 @@
                     });
                 } else {
                     $('#search-results').hide();
+                }
+            });
+            $('#search-input-mobile').on('keyup', function() {
+                console.log('searching');
+                var query = $(this).val();
+                if (query.length > 2) {
+                    $.ajax({
+                        url: '{{ route('products.search') }}',
+                        method: 'GET',
+                        data: {
+                            q: query
+                        },
+                        success: function(data) {
+                            $('#search-results-mobile').html(data);
+                            $('#search-results-mobile').show();
+                        }
+                    });
+                } else {
+                    $('#search-results-mobile').hide();
                 }
             });
             $('.add-to-cart').on('click', function() {

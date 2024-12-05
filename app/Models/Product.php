@@ -133,7 +133,7 @@ class Product extends Model
             return (object) [
                 'id' => $product->id,
                 'image' => $product->banner_image,
-                'link' => url('product/show/' . $product->slug),
+                'link' => url('productos/' . $product->slug),
             ];
         });
          return $banners->isEmpty() ? collect() : $banners;

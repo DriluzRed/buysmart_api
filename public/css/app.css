@@ -80,3 +80,19 @@
 }
 
 
+#search-form {
+    max-width: 500px; /* Limita el ancho máximo del formulario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombreado gris */
+    border-radius: 8px; /* Bordes redondeados para suavizar */
+    padding: 5px; /* Espacio interno para mejorar apariencia */
+}
+
+#search-input {
+    min-width: 200px;
+    border: none; /* Elimina el borde predeterminado */
+    outline: none; /* Elimina el borde azul al hacer clic */
+}
+
+#search-form:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el mouse */
+}
