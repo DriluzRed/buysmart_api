@@ -46,10 +46,10 @@
 <body>
 
     <!-- Header / Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 50px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand me-5" href="{{ url('/') }}">
+                <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 70px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -60,10 +60,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i> Inicio</a>
+                        <a class="nav-link custom-link" href="{{ url('/') }}"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle custom-link" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-th-list"></i> Categorías
                         </a>
@@ -79,21 +79,24 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <form class="d-flex position-relative" action="" method="GET" id="search-form">
+                   
+                </ul>
+
+                <!-- Carrito de compras y sesión del usuario -->
+                <ul class="navbar-nav ms-auto">
+
+                  <!-- Buscador visible en pantallas grandes (barra de navegación) -->
+                    <li class="nav-item d-none d-lg-block ms-4">
+                        <form class="d-flex position-relative w-100" action="" method="GET" id="search-form">
                             <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
                                 id="search-input" autocomplete="off">
-                            <button class="btn btn-outline-success-custom" type="submit">
+                            <button class="btn btn-outline-success-custom " type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                             <div class="dropdown-menu" id="search-results"
                                 style="display: none; position: absolute; top: 100%; left: 0; width: 100%;"></div>
                         </form>
                     </li>
-                </ul>
-
-                <!-- Carrito de compras y sesión del usuario -->
-                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <button class="btn" onclick="openCart()">
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -104,7 +107,7 @@
                     @guest('customer')  
                         @if (Route::has('customer.login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer.login') }}">Iniciar sesión</a>
+                                <a class="nav-link custom-link" href="{{ route('customer.login') }}">Iniciar sesión</a>
                             </li>
                         @endif
                     @else
@@ -136,6 +139,19 @@
 
     <!-- Contenido -->
     <main class="py-4">
+        
+        <div class="d-block d-lg-none w-100 mt-4">
+            <form class="d-flex justify-content-center align-items-center w-100" action="" method="GET" id="search-form">
+                <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
+                    id="search-input" autocomplete="off" style="max-width: 400px;">
+                <button class="btn btn-outline-success-custom" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div class="dropdown-menu" id="search-results"
+                    style="display: none; position: absolute; top: 100%; left: 0; width: 100%;"></div>
+            </form>
+        </div>
+
         @yield('content')
     </main>
 

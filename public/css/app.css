@@ -81,3 +81,96 @@
 .bg-success-custom {
     background-color: #044798 !important;
 }
+.custom-link {
+    color:  #044798 !important;
+    transition: color 0.3s ease;
+}
+.navbar .nav-link.custom-link {
+    font-size: 18px; /* Cambia el tamaño según lo que prefieras */
+    font-weight: bold; /* Opcional: para resaltar el texto */
+}
+
+.custom-link:hover {
+    color: #007bff !important; /* Celeste */
+}
+
+/* Estilo para el botón de buscar */
+form .btn.custom-link {
+    border-color:  #044798 !important;
+}
+
+form .btn.custom-link:hover {
+    border-color:#007bff !important;/* Celeste */
+    background-color: transparent;
+}
+#search-form {
+    max-width: 500px; /* Limita el ancho máximo del formulario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombreado gris */
+    border-radius: 8px; /* Bordes redondeados para suavizar */
+    padding: 5px; /* Espacio interno para mejorar apariencia */
+}
+
+#search-input {
+    min-width: 200px;
+    border: none; /* Elimina el borde predeterminado */
+    outline: none; /* Elimina el borde azul al hacer clic */
+}
+
+#search-form:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el mouse */
+}
+
+button[type="submit"] {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #044798; /* Asegura consistencia con tus enlaces */
+    transition: color 0.3s, box-shadow 0.3s;
+}
+
+button[type="submit"]:hover {
+    color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    background-color: white  !important;
+}
+
+.dropdown-item {
+    color: #000; /* Color de texto inicial */
+    background-color: #fff; /* Fondo inicial */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Suaviza la transición */
+}
+
+.dropdown-item:hover {
+    background-color: #044798; /* Fondo azul al hacer hover */
+    color: #044798 !important; /* Texto blanco en hover */
+}
+.navbar .btn i.fa-cart-shopping {
+    color: #044798; /* Azul */
+    font-size: 1.1rem; /* Tamaño del ícono */
+}
+
+#cart-count {
+    background-color: #044798 !important; /* Fondo azul para el badge */
+    color: #fff !important; /* Texto blanco */
+}
+
+/* Animación para el H2 */
+@keyframes fadeInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+h2 {
+    color: #044798 !important; /* Color azul */
+    animation: fadeInFromLeft 3s ease-out;
+    font-weight: bold !important;
+}

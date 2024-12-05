@@ -7,7 +7,8 @@
     <x-slider />
 </div>
 <div class="container mt-5">
-    <h2 class="text-center">Ofertas destacadas</h2>
+    
+    <h2 class="text-center">Productos en Oferta</h2>
     <div class="row">
         @if($offers->isNotEmpty())
         <div class="row">
@@ -20,7 +21,7 @@
             <p class="text-center">No hay ofertas disponibles en este momento.</p>
         @endif
     </div>
-    <h2 class="text-center">Nuevos Productos</h2>
+    <h2 class="text-center">Recién llegados</h2>
     <div class="row">
         @if($products->isNotEmpty())
         <div class="row">
