@@ -130,13 +130,13 @@ class Product extends Model
         ->where('on_slider', 1)
         ->get()
         ->map(function ($product) {
-            return (object) [
+            return [
                 'id' => $product->id,
                 'image' => $product->banner_image,
-                'link' => url('productos/' . $product->slug),
+                'link' => route('products.show', $product->slug),
             ];
         });
-         return $banners->isEmpty() ? collect() : $banners;
+        return $banners->isEmpty() ? collect() : $banners;
     }
     
 }
