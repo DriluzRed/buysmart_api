@@ -108,7 +108,7 @@ class CheckoutController extends Controller
                     $number = $config['whatsapp-number'];
                     // Generar el mensaje de WhatsApp
                     $message = "Hola, me gustaría hacer un pedido:\n\n";
-                    $message .= "Producto: {$orderItem->product->name}\n";
+                    $message .= "Enlace: " . route('products.show', $orderItem->product->slug) . "\n";
                     $message .= "Precio: {$orderItem->price}\n";
                     $message .= "Dirección de envío: {$order->address->full_address}\n";
                     $message .= "Método de pago: {$order->paymentMethod->name}\n";
@@ -179,7 +179,7 @@ class CheckoutController extends Controller
                 // Generar el mensaje de WhatsApp
                 $message = "Hola, me gustaría hacer un pedido:\n\n";
                 foreach ($cartItems as $item) {
-                    $message .= "Producto: {$item->product->name}\n";
+                    $message .= "Enlace: " . route('products.show', $item->product->slug) . "\n";
                     $price = $item->product->is_on_sale ? $item->product->sale_price : $item->product->price;
                     $message .= "Precio: {$price}\n";
                     $message .= "Cantidad: {$item->quantity}\n";

@@ -174,3 +174,31 @@ h2 {
     animation: fadeInFromLeft 3s ease-out;
     font-weight: bold !important;
 }
+
+
+#search-form-mobile {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombreado gris */
+    border-radius: 8px; /* Bordes redondeados para suavizar */
+    padding: 5px; /* Espacio interno para mejorar apariencia */
+}
+
+#search-input-mobile {
+    min-width: 200px;
+    border: none; /* Elimina el borde predeterminado */
+    outline: none; /* Elimina el borde azul al hacer clic */
+}
+
+#search-form-mobile:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el mouse */
+}
+
+
+.carousel-inner {
+    height: 400px !important; /* Ajusta la altura del contenedor del banner según tus necesidades */
+}
+
+@media (max-width: 768px) {
+    .carousel-inner {
+        height: 300px !important; /* Ajusta la altura del contenedor del banner para dispositivos móviles */
+    }
+}

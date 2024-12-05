@@ -84,7 +84,14 @@ class ProductController extends Controller
                 abort(404);
             }
             try {
-                return view('frontend.products.show', compact('product'));
+                $images = [];
+                $images[] = $product->main_image;
+                if ($product->productImages) {
+                    foreach ($product->productImages as $image) {
+                        $images[] = $image->image;
+                    }
+                }
+                return view('frontend.products.show', compact('product', 'images'));
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Error al cargar el producto');
             }

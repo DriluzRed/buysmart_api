@@ -126,7 +126,7 @@ class Product extends Model
 
     public static function getAllBanners()
     {
-        return self::where('banner_image', '!=', null)
+        $banners = self::where('banner_image', '!=', null)
         ->where('on_slider', 1)
         ->get()
         ->map(function ($product) {
@@ -136,6 +136,7 @@ class Product extends Model
                 'link' => route('products.show', $product->slug),
             ];
         });
+        return $banners->isEmpty() ? collect() : $banners;
     }
     
 }

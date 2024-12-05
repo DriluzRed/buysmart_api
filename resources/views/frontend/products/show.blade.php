@@ -6,19 +6,12 @@
         <div class="row">
             <!-- Columna de imágenes del producto -->
             <div class="col-md-5">
-                <!-- Imagen principal del producto -->
-                <div class="main-image-container">
-                    <img id="mainImage" src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->name }}"
-                        class="img-fluid rounded shadow-sm mb-3">
-                </div>
-
-                <!-- Slider de imágenes adicionales -->
                 <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        @foreach ($product->productImages as $index => $image)
+                        @foreach ($images as $index => $image)
                             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/' . $image->image) }}" class="d-block w-100 thumbnail-image"
-                                    data-image-url="{{ asset('storage/' . $image->image) }}" alt="Imagen {{ $index + 1 }}">
+                                <img src="{{ asset('storage/' . $image) }}" class="d-block w-100 thumbnail-image"
+                                    data-image-url="{{ asset('storage/' . $image) }}" alt="Imagen {{ $index + 1 }}">
                             </div>
                         @endforeach
                     </div>

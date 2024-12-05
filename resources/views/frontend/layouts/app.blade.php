@@ -30,15 +30,18 @@
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Establece el cuerpo con altura mínima de la pantalla */
+            min-height: 100vh;
+            /* Establece el cuerpo con altura mínima de la pantalla */
         }
 
         main {
-            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+            flex-grow: 1;
+            /* Hace que el contenido ocupe el espacio restante */
         }
 
         footer {
-            margin-top: auto; /* Empuja el footer hacia el fondo de la página */
+            margin-top: auto;
+            /* Empuja el footer hacia el fondo de la página */
         }
     </style>
 </head>
@@ -49,7 +52,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             <a class="navbar-brand me-5" href="{{ url('/') }}">
-                <img src="{{$config['navbar_logo']}}" alt="{{ config('app.name', 'Mi E-commerce') }}" class="img-fluid" style="max-height: 70px;">
+                <img src="{{ $config['navbar_logo'] }}" alt="{{ config('app.name', 'Mi E-commerce') }}"
+                    class="img-fluid" style="max-height: 70px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -60,32 +64,35 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link custom-link" href="{{ url('/') }}"><i class="fas fa-home"></i> Inicio</a>
+                        <a class="nav-link custom-link" href="{{ url('/') }}"><i class="fas fa-home"></i>
+                            Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle custom-link" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle custom-link" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-th-list"></i> Categorías
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('products.index') }}"><i class="fas fa-boxes"></i> Todos los productos</a>
+                            <a class="dropdown-item" href="{{ route('products.index') }}"><i class="fas fa-boxes"></i>
+                                Todos los productos</a>
                             <hr>
                             @foreach ($categories as $category)
                                 <a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">
                                     <i class="fas fa-box
-                                    "></i> {{ $category->name }}
+                                    "></i>
+                                    {{ $category->name }}
                                 </a>
                             @endforeach
                         </ul>
                     </li>
-                   
+
                 </ul>
 
                 <!-- Carrito de compras y sesión del usuario -->
                 <ul class="navbar-nav ms-auto">
 
-                  <!-- Buscador visible en pantallas grandes (barra de navegación) -->
+                    <!-- Buscador visible en pantallas grandes (barra de navegación) -->
                     <li class="nav-item d-none d-lg-block ms-4">
                         <form class="d-flex position-relative w-100" action="" method="GET" id="search-form">
                             <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
@@ -104,7 +111,7 @@
                         </button>
                     </li>
                     <!-- Authentication Links -->
-                    @guest('customer')  
+                    @guest('customer')
                         @if (Route::has('customer.login'))
                             <li class="nav-item">
                                 <a class="nav-link custom-link" href="{{ route('customer.login') }}">Iniciar sesión</a>
@@ -116,17 +123,19 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::guard('customer')->user()->name }}
                             </a>
-                            
+
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('customer.profile') }}">Mis Datos</a>
                                 <a class="dropdown-item" href="{{ route('customer.orders') }}">Mis Pedidos</a>
-                                <a class="dropdown-item" href="{{ route('customer.change-password') }}">Cambiar Contraseña</a>
+                                <a class="dropdown-item" href="{{ route('customer.change-password') }}">Cambiar
+                                    Contraseña</a>
                                 <a class="dropdown-item" href="{{ route('customer.logout') }}"
                                     onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     Cerrar sesión
                                 </a>
-                                <form id="logout-form" action="{{ route('customer.logout') }}" method="GET" class="d-none">
+                                <form id="logout-form" action="{{ route('customer.logout') }}" method="GET"
+                                    class="d-none">
                                     @csrf
                                 </form>
                             </div>
@@ -140,18 +149,6 @@
     <!-- Contenido -->
     <main class="py-4">
         
-        <div class="d-block d-lg-none w-100 mt-4">
-            <form class="d-flex justify-content-center align-items-center w-100" action="" method="GET" id="search-form">
-                <input type="text" name="q" class="form-control me-2" placeholder="Buscar..."
-                    id="search-input" autocomplete="off" style="max-width: 400px;">
-                <button class="btn btn-outline-success-custom" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                <div class="dropdown-menu" id="search-results"
-                    style="display: none; position: absolute; top: 100%; left: 0; width: 100%;"></div>
-            </form>
-        </div>
-
         @yield('content')
     </main>
 
@@ -166,11 +163,14 @@
                 <div class="col-md-4 text-center">
                     <h5>Enlaces útiles</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('info.faq') }}" class="text-black text-decoration-none">Preguntas Frecuentes</a></li>
-                        <li><a href="{{ route('info.security-policy') }}" class="text-black text-decoration-none">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}" class="text-black text-decoration-none">Términos de Servicio</a></li>
+                        <li><a href="{{ route('info.faq') }}" class="text-black text-decoration-none">Preguntas
+                                Frecuentes</a></li>
+                        <li><a href="{{ route('info.security-policy') }}"
+                                class="text-black text-decoration-none">Política de Privacidad</a></li>
+                        <li><a href="{{ route('info.service-terms') }}"
+                                class="text-black text-decoration-none">Términos de Servicio</a></li>
                     </ul>
-                    
+
                 </div>
                 <div class="col-md-4 text-center text-md-right">
                     <h5>Síguenos</h5>
@@ -198,9 +198,9 @@
                 enableTime: true,
                 dateFormat: 'Y-m-d H:i',
             });
-            
 
-            
+
+
             $('#search-input').on('keyup', function() {
                 var query = $(this).val();
                 if (query.length > 2) {
@@ -217,6 +217,25 @@
                     });
                 } else {
                     $('#search-results').hide();
+                }
+            });
+            $('#search-input-mobile').on('keyup', function() {
+                console.log('searching');
+                var query = $(this).val();
+                if (query.length > 2) {
+                    $.ajax({
+                        url: '{{ route('products.search') }}',
+                        method: 'GET',
+                        data: {
+                            q: query
+                        },
+                        success: function(data) {
+                            $('#search-results-mobile').html(data);
+                            $('#search-results-mobile').show();
+                        }
+                    });
+                } else {
+                    $('#search-results-mobile').hide();
                 }
             });
             $('.add-to-cart').on('click', function() {
@@ -250,8 +269,7 @@
                                 timer: 1500,
                                 showConfirmButton: false
                             });
-                        }
-                        else{
+                        } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
@@ -272,8 +290,10 @@
                 success: function(data) {
                     var cartItems = $('#cart-items');
                     cartItems.empty();
-                    if(data.length === 0){
-                        cartItems.append('<li class="list-group-item text-center">No hay productos en el carrito</li>');
+                    if (data.length === 0) {
+                        cartItems.append(
+                            '<li class="list-group-item text-center">No hay productos en el carrito</li>'
+                            );
                     }
                     data.forEach(function(item) {
                         cartItems.append(`
@@ -321,11 +341,10 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(data) {
-                    if(data.success){
+                    if (data.success) {
                         openCart();
                         updateCartCount();
-                    }
-                    else{
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -372,7 +391,6 @@
                 }
             });
         }
-        
     </script>
     @yield('scripts')
 </body>
