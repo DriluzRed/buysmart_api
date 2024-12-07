@@ -15,15 +15,15 @@ class SubCategorySeeder extends Seeder
     public function run(): void
     {
         $subcategories = [
-            ['name' => 'Mobile Phones', 'slug' => Str::slug('Mobile Phones'), 'category_id' => 1], // Electronics
-            ['name' => 'Laptops', 'slug' => Str::slug('Laptops'), 'category_id' => 1],              // Electronics
-            ['name' => 'Refrigerators', 'slug' => Str::slug('Refrigerators'), 'category_id' => 2], // Home Appliances
-            ['name' => 'Novels', 'slug' => Str::slug('Novels'), 'category_id' => 3],               // Books
-            ['name' => 'Fiction', 'slug' => Str::slug('Fiction'), 'category_id' => 3],             // Books
-            ['name' => 'Men\'s Clothing', 'slug' => Str::slug('Men\'s Clothing'), 'category_id' => 4], // Clothing
-            ['name' => 'Women\'s Clothing', 'slug' => Str::slug('Women\'s Clothing'), 'category_id' => 4], // Clothing
-            ['name' => 'Football', 'slug' => Str::slug('Football'), 'category_id' => 5],           // Sports
-            ['name' => 'Tennis', 'slug' => Str::slug('Tennis'), 'category_id' => 5],               // Sports
+            ['name' => 'Telefonos Moviles', 'slug' => Str::slug('Telefonos Moviles'), 'category_id' => 1], // Electronica
+            ['name' => 'Portatiles', 'slug' => Str::slug('Portatiles'), 'category_id' => 1],              // Electronica
+            ['name' => 'Refrigeradores', 'slug' => Str::slug('Refrigeradores'), 'category_id' => 2],      // Electrodomesticos
+            ['name' => 'Novelas', 'slug' => Str::slug('Novelas'), 'category_id' => 3],                   // Libros
+            ['name' => 'Ficcion', 'slug' => Str::slug('Ficcion'), 'category_id' => 3],                   // Libros
+            ['name' => 'Ropa de Hombre', 'slug' => Str::slug('Ropa de Hombre'), 'category_id' => 4],     // Ropa
+            ['name' => 'Ropa de Mujer', 'slug' => Str::slug('Ropa de Mujer'), 'category_id' => 4],       // Ropa
+            ['name' => 'Futbol', 'slug' => Str::slug('Futbol'), 'category_id' => 5],                     // Deportes
+            ['name' => 'Tenis', 'slug' => Str::slug('Tenis'), 'category_id' => 5],                       // Deportes
         ];
 
         foreach ($subcategories as $subcategory) {
