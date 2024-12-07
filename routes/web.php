@@ -82,7 +82,7 @@ Route::delete('/addresses/{id}', [App\Http\Controllers\AddressController::class,
 
 Route::get('/get-cities', [App\Http\Controllers\AddressController::class, 'getCities'])->name('get-cities');
 Route::get('/get-neighborhoods', [App\Http\Controllers\AddressController::class, 'getNeighborhoods'])->name('get-neighborhoods');
-Route::get('/get-subcategories', [App\Http\Controllers\SubcategoryController::class, 'getSubcategories'])->name('get-subcategories');
+Route::get('/get-subcategories', [App\Http\Controllers\SubCategoryController::class, 'getSubcategories'])->name('get-subcategories');
 
 Route::get('customer/password/reset', [CustomerResetPasswordController::class, 'showLinkRequestForm'])->name('customer.password.request');
 Route::post('customer/password/email', [CustomerResetPasswordController::class, 'sendResetLinkEmail'])->name('customer.password.email');
