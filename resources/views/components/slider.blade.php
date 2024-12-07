@@ -2,8 +2,9 @@
     <div class="carousel-inner">
         @foreach ($banners as $key => $banner)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                <img src="{{ asset('storage/'.$banner->image) }}" class="d-block w-100" alt="Banner" style="height: 400px; object-fit: cover;">
-                <a href="{{ $banner->link }}" class="stretched-link"></a>
+                <div class="d-block w-100" style="height: 400px; background: url('{{ asset('storage/'.$banner['image']) }}') center center / cover no-repeat;">
+                    <a href="{{ $banner['link'] }}" class="stretched-link"></a>
+                </div>
             </div>
         @endforeach
     </div>
