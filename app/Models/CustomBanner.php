@@ -35,7 +35,7 @@ class CustomBanner extends Model
         $banners = self::where('image', '!=', null)
         ->get()
         ->map(function ($banner) {
-            return (object) [
+            return [
                 'id' => $banner->id,
                 'image' => $banner->image,
                 'link' => $banner->link,
