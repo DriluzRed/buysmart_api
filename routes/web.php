@@ -48,8 +48,8 @@ Route::get('/categorias/{slug}', [App\Http\Controllers\CategoryController::class
 
 
 //subcategories routes
-Route::get('/sub-categorias', [App\Http\Controllers\SubcategoryController::class, 'index'])->name('subcategories.index');
-Route::get('/sub-categorias/{slug}', [App\Http\Controllers\SubcategoryController::class, 'show'])->name('subcategories.show');
+Route::get('/sub-categorias', [App\Http\Controllers\SubCategoryController::class, 'index'])->name('subcategories.index');
+Route::get('/sub-categorias/{slug}', [App\Http\Controllers\SubCategoryController::class, 'show'])->name('subcategories.show');
 
 //brands routes
 
@@ -82,7 +82,7 @@ Route::delete('/addresses/{id}', [App\Http\Controllers\AddressController::class,
 
 Route::get('/get-cities', [App\Http\Controllers\AddressController::class, 'getCities'])->name('get-cities');
 Route::get('/get-neighborhoods', [App\Http\Controllers\AddressController::class, 'getNeighborhoods'])->name('get-neighborhoods');
-Route::get('/get-subcategories', [App\Http\Controllers\SubcategoryController::class, 'getSubcategories'])->name('get-subcategories');
+Route::get('/get-subcategories', [App\Http\Controllers\SubCategoryController::class, 'getSubcategories'])->name('get-subcategories');
 
 Route::get('customer/password/reset', [CustomerResetPasswordController::class, 'showLinkRequestForm'])->name('customer.password.request');
 Route::post('customer/password/email', [CustomerResetPasswordController::class, 'sendResetLinkEmail'])->name('customer.password.email');
