@@ -75,12 +75,6 @@ class OrderCrudController extends CrudController
            
         ]);
         CRUD::addColumn([
-            'name' => 'payment_status',
-            'type' => 'enum',
-            'label' => 'Estado de pago',
-            'options' => ['pending' => 'Pendiente', 'completed' => 'Completado', 'canceled' => 'Cancelado', 'refunded' => 'Reembolsado', 'failed' => 'Fallido', 'processing' => 'Procesando', 'confirmed' => 'Confirmado','paid' => 'Pagado'],
-        ]);
-        CRUD::addColumn([
             'name' => 'address_id',
             'type' => 'select',
             'label' => 'Direccion de envio',
@@ -93,16 +87,6 @@ class OrderCrudController extends CrudController
             'name' => 'formatted_total',
             'type' => 'text',
             'label' => 'Total',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'created_at',
-            'type'  => 'text',
-            'label' => 'Fecha de creacion',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'updated_at',
-            'type'  => 'text',
-            'label' => 'Fecha de actualizacion',
         ]);
     }
 
@@ -151,8 +135,6 @@ class OrderCrudController extends CrudController
     public function setupShowOperation()
     {
         $this->setupListOperation();
-        // En OrderCrudController.php
-
         $this->crud->addColumn([
             'name'  => 'items',
             'type'  => 'custom_html',
@@ -180,17 +162,6 @@ class OrderCrudController extends CrudController
                 return $html;
             },
         ]);
-        $this->crud->addColumn([
-            'name'  => 'created_at',
-            'type'  => 'text',
-            'label' => 'Fecha de creacion',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'updated_at',
-            'type'  => 'text',
-            'label' => 'Fecha de actualizacion',
-        ]);
-        
-
+        CRUD::addButtonFromModelFunction('line', 'open_google', 'openGoogle', 'beginning');
     }
 }

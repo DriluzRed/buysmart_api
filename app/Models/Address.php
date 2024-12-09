@@ -19,6 +19,8 @@ class Address extends Model
         'type',
         'is_main',
         'for_billing',
+        'latitude',
+        'longitude',
     ];
 
     public function customer()

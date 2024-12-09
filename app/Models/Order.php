@@ -11,7 +11,7 @@ class Order extends Model
 {
     use CrudTrait;
     use HasFactory;
-    
+
     protected $fillable = [
         'customer_id',
         'status',
@@ -47,7 +47,7 @@ class Order extends Model
     {
         return $this->hasOne(Invoice::class);
     }
-    
+
     public function getStatusTranslatedAttribute()
     {
         $statuses = [
@@ -71,4 +71,11 @@ class Order extends Model
         return 'Gs ' . Helper::formatPrice($this->total);
     }
 
+    function openGoogle($crud)
+    {
+        $order = $crud->getCurrentEntry();
+        $latitud = $order->address->latitude;
+        $longitud = $order->address->longitude;
+        return '<a class="btn btn-sm btn-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query='.$latitud.','.$longitud.'" data-toggle="tooltip" title="Ubicacion a enviar"><i class="la la-map"></i>Ubicacion de envio</a>';
+    }
 }

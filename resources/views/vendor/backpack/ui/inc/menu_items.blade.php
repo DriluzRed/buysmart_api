@@ -7,7 +7,6 @@
     <x-backpack::menu-dropdown-item title="Permisos" icon="la la-key" :link="backpack_url('permission')" />
 </x-backpack::menu-dropdown>
 <x-backpack::menu-dropdown title="Configuraciones del sistema" icon="la la-cog">
-    <x-backpack::menu-dropdown-item title='Configuraciones de Entorno' icon='la la-cog' :link="backpack_url('setting')" />
     <x-backpack::menu-dropdown-item title="Departmentos" icon="la la-question" :link="backpack_url('department')" />
     <x-backpack::menu-dropdown-item title="Ciudades" icon="la la-question" :link="backpack_url('city')" />
     <x-backpack::menu-dropdown-item title="Barrios" icon="la la-question" :link="backpack_url('neighborhood')" />

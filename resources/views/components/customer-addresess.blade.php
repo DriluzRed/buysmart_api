@@ -33,7 +33,8 @@
                                         data-address-line-1="{{ $address->address_line_1 }}"
                                         data-address-line-2="{{ $address->address_line_2 }}"
                                         data-type="{{ $address->type }}" data-is-main="{{ $address->is_main }}"
-                                        data-for-billing="{{ $address->for_billing }}"><i
+                                        data-for-billing="{{ $address->for_billing }}" data-latitude = "{{$address->latitude}}"
+                                        data-longitude = "{{$address->longitude}}"><i
                                             class="fas fa-pencil"></i></a>
                                     <button class="btn btn-danger delete-address" data-id="{{ $address->id }}"><i
                                             class="fas fa-trash"></i></button>
@@ -52,7 +53,7 @@
 </div>
 
 <!-- Modal para añadir dirección -->
-<div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+<div class="modal fade modal-lg" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -96,6 +97,14 @@
                         <input type="text" class="form-control" id="address_line_2" name="address_line_2">
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Ubicación GPS</label>
+                        <button type="button" class="btn btn-secondary mb-2" id="detect-location">Detectar mi
+                            ubicación</button>
+                        <div id="map" style="height: 300px;" class="rounded border"></div>
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
+                    </div>
+                    <div class="mb-3">
                         <label for="type" class="form-label">Tipo</label>
                         <select name="type" id="type" class="form-select select2">
                             <option value="work">Trabajo</option>
@@ -122,7 +131,7 @@
 </div>
 
 <!-- Modal para editar dirección -->
-<div class="modal fade" id="editAddressModal" tabindex="-1" aria-labelledby="editAddressModalLabel"
+<div class="modal fade modal-lg" id="editAddressModal" tabindex="-1" aria-labelledby="editAddressModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -136,7 +145,8 @@
                     <input type="hidden" id="editAddressId" name="id">
                     <div class="mb-3">
                         <label for="editDepartmentId" class="form-label">Departamento</label>
-                        <select name="department_id" id="editDepartmentId" class="form-select select2" required onchange="loadCities(this.value, '', '#editCityId')">
+                        <select name="department_id" id="editDepartmentId" class="form-select select2" required
+                            onchange="loadCities(this.value, '', '#editCityId')">
                             <option value="">Seleccione un departamento</option>
                             @foreach ($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->name }}</option>
@@ -145,7 +155,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="editCityId" class="form-label">Ciudad</label>
-                        <select name="city_id" id="editCityId" class="form-select select2" required onchange="loadNeighborhoods(this.value, '', '#editNeighborhoodId')">
+                        <select name="city_id" id="editCityId" class="form-select select2" required
+                            onchange="loadNeighborhoods(this.value, '', '#editNeighborhoodId')">
                             <option value="">Seleccione una ciudad</option>
                         </select>
                     </div>
@@ -164,6 +175,17 @@
                         <label for="editAddressLine2" class="form-label">Dirección Línea 2</label>
                         <input type="text" class="form-control" id="editAddressLine2" name="address_line_2">
                     </div>
+                    <div class="row">
+                        <div class="mb-3">
+                            <label class="form-label">Ubicación GPS</label>
+                            <button type="button" class="btn btn-secondary mb-2" id="detect-edit-location">Detectar mi
+                                ubicación</button>
+                            <div id="editMap" style="height: 350px;" class="rounded border"></div>
+                            <input type="hidden" id="editLatitude" name="latitude">
+                            <input type="hidden" id="editLongitude" name="longitude">
+                        </div>
+                    </div>
+                    
                     <div class="mb-3">
                         <label for="editType" class="form-label">Tipo</label>
                         <select name="type" id="editType" class="form-select select2">
@@ -183,7 +205,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary-custom" id="update-address">Guardar cambios</button>
+                    <button type="button" class="btn btn-primary-custom" id="update-address">Guardar
+                        cambios</button>
                 </div>
             </form>
         </div>
@@ -193,9 +216,50 @@
 
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
+        let map, marker;
+
+        function initializeMap(lat = -25.2637399, lng = -57.5759259) {
+            map = L.map('map').setView([lat, lng], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 16,
+            }).addTo(map);
+
+            marker = L.marker([lat, lng], {
+                draggable: true
+            }).addTo(map);
+
+            marker.on('dragend', function(e) {
+                const position = marker.getLatLng();
+                updateCoordinates(position.lat, position.lng);
+            });
+        }
+
+        function updateCoordinates(lat, lng) {
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        }
+        $('#detect-location').on('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    map.setView([lat, lng], 13);
+                    marker.setLatLng([lat, lng]);
+                    updateCoordinates(lat, lng);
+                }, function(error) {
+                    alert('No se pudo obtener la ubicación. Por favor, verifica los permisos.');
+                });
+            } else {
+                alert('Tu navegador no soporta la geolocalización.');
+            }
+        });
         $(document).ready(function() {
+
+            initializeMap();
+            initializeEditMap();
             $('#save-address').on('click', function() {
                 var data = {
                     _token: $('input[name="_token"]').val(),
@@ -207,7 +271,9 @@
                     address_line_2: $('#addAddressModal input[name="address_line_2"]').val(),
                     type: $('#addAddressModal select[name="type"]').val(),
                     is_main: $('#addAddressModal input[name="is_main"]').prop('checked'),
-                    for_billing: $('#addAddressModal input[name="for_billing"]').prop('checked')
+                    for_billing: $('#addAddressModal input[name="for_billing"]').prop('checked'),
+                    latitude: $('#addAddressModal input[name="latitude"]').val(),
+                    longitude: $('#addAddressModal input[name="longitude"]').val()
                 };
 
                 $.ajax({
@@ -255,7 +321,9 @@
                     address_line_2: $('#editAddressModal input[name="address_line_2"]').val(),
                     type: $('#editAddressModal select[name="type"]').val(),
                     is_main: $('#editAddressModal input[name="is_main"]').prop('checked'),
-                    for_billing: $('#editAddressModal input[name="for_billing"]').prop('checked')
+                    for_billing: $('#editAddressModal input[name="for_billing"]').prop('checked'),
+                    latitude: $('#editAddressModal input[name="latitude"]').val(),
+                    longitude: $('#editAddressModal input[name="longitude"]').val()
                 };
 
                 $.ajax({
@@ -300,7 +368,9 @@
                 var type = $(this).data('type');
                 var isMain = $(this).data('is-main');
                 var forBilling = $(this).data('for-billing');
-
+                var latitude = $(this).data('latitude');
+                var longitude = $(this).data('longitude');
+                // Configurar valores en el modal
                 $('#editAddressId').val(id);
                 $('#editCustomerId').val(customerId);
                 $('#editDepartmentId').val(departmentId);
@@ -309,17 +379,26 @@
                 $('#editType').val(type);
                 $('#editIsMain').prop('checked', isMain);
                 $('#editForBilling').prop('checked', forBilling);
+                $('#editLatitude').val(latitude);
+                $('#editLongitude').val(longitude);
 
                 // Cargar ciudades y barrios
                 loadCities(departmentId, cityId, '#editCityId');
                 loadNeighborhoods(cityId, neighborhoodId, '#editNeighborhoodId');
 
+                // Actualizar la acción del formulario
                 $('#editAddressForm').attr('action', '{{ route('addresses.update', '') }}/' + id);
-                $('#editAddressModal').modal('show');
 
-                // Cargar ciudades y barrios
-                loadCities(departmentId, cityId, '#editCityId');
-                loadNeighborhoods(cityId, neighborhoodId, '#editNeighborhoodId');
+                // Mostrar el modal
+                $('#editAddressModal').modal('show');
+                // Actualizar el mapa y el marcador
+                if (editMap && editMarker) {
+                    const lat = parseFloat(latitude) || -25.2637; // Coordenada predeterminada si falta
+                    const lng = parseFloat(longitude) || -57.5759; // Coordenada predeterminada si falta
+
+                    editMap.setView([lat, lng], 13); // Cambiar la vista del mapa
+                    editMarker.setLatLng([lat, lng]); // Mover el marcador
+                }
             });
 
             // Manejar datos para el modal de eliminación
@@ -471,5 +550,45 @@
                 $('#neighborhood_id').append('<option value="">Sin barrio</option>');
             }
         }
+        let editMap, editMarker;
+
+        function initializeEditMap(lat = -25.2637, lng = -57.5759) {
+            editMap = L.map('editMap').setView([lat, lng], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(editMap);
+
+            editMarker = L.marker([lat, lng], {
+                draggable: true
+            }).addTo(editMap);
+
+            editMarker.on('dragend', function(e) {
+                const position = editMarker.getLatLng();
+                updateEditCoordinates(position.lat, position.lng);
+            });
+        }
+
+        function updateEditCoordinates(lat, lng) {
+            document.getElementById('editLatitude').value = lat;
+            document.getElementById('editLongitude').value = lng;
+        }
+
+        document.getElementById('detect-edit-location').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    editMap.setView([lat, lng], 13);
+                    editMarker.setLatLng([lat, lng]);
+                    updateEditCoordinates(lat, lng);
+                }, function(error) {
+                    alert('No se pudo obtener la ubicación. Por favor, verifica los permisos.');
+                });
+            } else {
+                alert('Tu navegador no soporta la geolocalización.');
+            }
+        });
     </script>
 @endsection

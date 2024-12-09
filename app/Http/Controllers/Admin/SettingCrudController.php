@@ -44,7 +44,6 @@ class SettingCrudController extends CrudController
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
-        $this->crud->addButton('create', 'top', 'button', 'backpack::crud.buttons.create', 'beginning');
        
     }
 
@@ -57,12 +56,58 @@ class SettingCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(SettingRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombre',
+            'attributes' => [
+                'placeholder' => 'Nombre de la configuración',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'value',
+            'type' => 'text',
+            'label' => 'Value',
+            'attributes' => [
+                'placeholder' => 'Valor de la configuración',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'key',
+            'type' => 'text',
+            'label' => 'key',
+            'attributes' => [
+                'placeholder' => 'Clave de la configuración',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'description',
+            'type' => 'textarea',
+            'label' => 'Descripción',
+            'attributes' => [
+                'placeholder' => 'Descripción de la configuración',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'field',
+            'type' => 'text',
+            'label' => 'Field',
+            'attributes' => [
+                'placeholder' => 'Campo de la configuración',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'active',
+            'type' => 'checkbox',
+            'label' => 'Activo',
+            
+        ]);
     }
 
     /**

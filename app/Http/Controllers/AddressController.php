@@ -31,6 +31,8 @@ class AddressController extends Controller
         $address->address_line_1 = $request->address_line_1;
         $address->address_line_2 = $request->address_line_2;
         $address->department_id = $request->department_id;
+        $address->latitude = $request->latitude;
+        $address->longitude = $request->longitude;
         $address->city_id = $request->city_id;
         $address->neighborhood_id = !empty($request->neighborhood_id) ? $request->neighborhood_id : null;
         $address->type = $request->type;
@@ -64,6 +66,8 @@ class AddressController extends Controller
         $address->customer_id = Auth::guard('customer')->user()->id;
         $address->address_line_1 = $request->address_line_1;
         $address->address_line_2 = $request->address_line_2;
+        $address->latitude = $request->latitude;
+        $address->longitude = $request->longitude;
         $address->department_id = $request->department_id;
         $address->city_id = $request->city_id;
         $address->neighborhood_id = !empty($request->neighborhood_id) ? $request->neighborhood_id : null;
