@@ -153,34 +153,44 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-light py-4 mt-auto">
+    <footer class="bg-dark text-white py-5 mt-auto">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 text-center text-md-left">
-                    <h5>{{ config('app.name', 'Mi E-commerce') }}</h5>
-                    <p>© {{ date('Y') }} Todos los derechos reservados.</p>
+                <!-- Sección 1: Información de la empresa -->
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="text-danger">{{ config('app.name', 'Mi E-commerce') }}</h5>
+                    <p>&copy; {{ date('Y') }} Todos los derechos reservados.</p>
+                    <p>Comprometidos con la calidad y tu satisfacción.</p>
                 </div>
-                <div class="col-md-4 text-center">
-                    <h5>Enlaces útiles</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('info.faq') }}" class="text-black text-decoration-none">Preguntas
-                                Frecuentes</a></li>
-                        <li><a href="{{ route('info.security-policy') }}"
-                                class="text-black text-decoration-none">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}"
-                                class="text-black text-decoration-none">Términos de Servicio</a></li>
-                    </ul>
-
+                <div class="col"></div>
+                <!-- Sección 3: Redes Sociales -->
+                <div class="col-md-4 text-md-right text-center">
+                    <h5 class="text-danger">Síguenos</h5>
+                    <div class="social-icons mt-2">
+                        <a href="https://www.facebook.com/profile.php?id=100068515622233" target="_blank" class="text-white mx-2">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/csr.paraguay/" class="text-white mx-2" target="_blank">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="https://twitter.com" class="text-white mx-2" target="_blank">
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-4 text-center text-md-right">
-                    <h5>Síguenos</h5>
-                    <a href="https://www.facebook.com" class="text-dark mr-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" class="text-dark mr-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
-                </div>
+            </div>
+            <!-- Sección de Derechos -->
+            <div class="text-center mt-4">
+                <small>&copy; {{ date('Y') }} {{ config('app.name', 'Mi E-commerce') }}. Todos los derechos reservados.</small>
+            </div>
+            <!-- Sección: Desarrollado por GOAL -->
+            <div class="text-center mt-3 text-white">
+                <small>Desarrollado por <span class="text-warning">GOAL</span></small>
             </div>
         </div>
     </footer>
+    
+
 
     <!-- Modal del carrito -->
     @include('components.cart-modal')

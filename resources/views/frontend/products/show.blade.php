@@ -28,9 +28,14 @@
 
             <!-- Columna de detalles del producto -->
             <div class="col-md-7">
-                <h1 class="display-4 text-primary">{{ $product->name }}</h1>
+                <h1 class="display-4 text-black">{{ $product->name }}</h1>
                 <p class="lead">{{ $product->description }}</p>
-                <p class="h4 text-dark">Gs. {{ \App\Helpers\Helper::formatPrice($product->price) }}</p>
+                @if($product->is_on_sale)
+                    <p class="h4 text-danger">Gs. {{ \App\Helpers\Helper::formatPrice($product->sale_price) }}</p>
+                    <p class="h5 text-muted text-decoration-line-through">Gs. {{ \App\Helpers\Helper::formatPrice($product->price) }}</p>
+                @else
+                    <p class="h4 text-dark">Gs. {{ \App\Helpers\Helper::formatPrice($product->price) }}</p>
+                @endif
 
                 @if(isset($product->stock->quantity) && $product->stock->quantity > 0)
                     <p class="text-success"><strong>Disponible</strong></p>

@@ -202,3 +202,27 @@ h2 {
         height: 300px !important; /* Ajusta la altura del contenedor del banner para dispositivos móviles */
     }
 }
+
+.product-card img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card img:hover {
+    transform: scale(1.1);
+}
+
+.card-footer .btn {
+    transition: background-color 0.2s ease;
+}
+
+.card-footer .btn:hover {
+    background-color: #0056b3 !important;
+}
+
+.card-title {
+    font-size: 1rem;
+}
+
+.card-text.text-muted {
+    font-size: 0.85rem;
+}
