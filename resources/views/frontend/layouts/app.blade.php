@@ -198,8 +198,8 @@
         $(document).ready(function() {
             updateCartCount();
             flatpickr('.datepicker', {
-                enableTime: true,
-                dateFormat: 'Y-m-d H:i',
+                enableTime: false,
+                dateFormat: 'Y-m-d',
             });
             
 
