@@ -161,6 +161,23 @@ class OrderCrudController extends CrudController
             'model' => \App\Models\Customer::class,
         ]);
         $this->crud->addColumn([
+            'name'  => 'customer_email',
+            'type'  => 'text',
+            'label' => 'Email del Cliente',
+            'attribute' => 'email',
+            'entity' => 'customer',
+            'model' => \App\Models\Customer::class,
+        ]);
+        $this->crud->addColumn([
+            'name'  => 'customer_ruc',
+            'type'  => 'text',
+            'label' => 'Ruc del Cliente',
+            'attribute' => 'ruc',
+            'entity' => 'customer',
+            'model' => \App\Models\Customer::class,
+        ]);
+        
+        $this->crud->addColumn([
             'name'  => 'items',
             'type'  => 'custom_html',
             'label' => 'Items de la Orden',
@@ -186,16 +203,6 @@ class OrderCrudController extends CrudController
                 $html .= '</tbody></table>';
                 return $html;
             },
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'created_at',
-            'type'  => 'text',
-            'label' => 'Fecha de creacion',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'updated_at',
-            'type'  => 'text',
-            'label' => 'Fecha de actualizacion',
         ]);
         
 

@@ -76,5 +76,15 @@ class Order extends Model
         return $this->customer->phone;
     }
 
+    public function getCustomerEmailAttribute()
+    {
+        return $this->customer->email;
+    }
+
+    public function getCustomerRucAttribute()
+    {
+        return $this->customer->ruc;
+    }
+
 
 }
