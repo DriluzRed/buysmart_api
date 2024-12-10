@@ -71,4 +71,10 @@ class Order extends Model
         return 'Gs ' . Helper::formatPrice($this->total);
     }
 
+    public function getCustomerPhoneAttribute()
+    {
+        return $this->customer->phone;
+    }
+
+
 }

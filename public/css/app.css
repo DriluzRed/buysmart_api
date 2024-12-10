@@ -171,7 +171,6 @@ button[type="submit"]:hover {
 
 h2 {
     color: #044798 !important; /* Color azul */
-    animation: fadeInFromLeft 3s ease-out;
     font-weight: bold !important;
 }
 
@@ -226,3 +225,23 @@ h2 {
 .card-text.text-muted {
     font-size: 0.85rem;
 }
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-item img {
+    max-height: 150px; /* Ajusta según tu diseño */
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+

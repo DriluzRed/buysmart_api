@@ -152,7 +152,14 @@ class OrderCrudController extends CrudController
     {
         $this->setupListOperation();
         // En OrderCrudController.php
-
+        $this->crud->addColumn([
+            'name'  => 'customer_phone',
+            'type'  => 'text',
+            'label' => 'Telefono del Cliente',
+            'attribute' => 'phone',
+            'entity' => 'customer',
+            'model' => \App\Models\Customer::class,
+        ]);
         $this->crud->addColumn([
             'name'  => 'items',
             'type'  => 'custom_html',
