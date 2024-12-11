@@ -156,27 +156,32 @@
     
 
     <!-- Footer -->
-    <footer class="bg-light py-4 mt-auto">
+    <footer class="bg-dark text-white py-5 mt-auto">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 text-center text-md-left">
-                    <h5>{{ config('app.name', 'Mi E-commerce') }}</h5>
-                    <p>© {{ date('Y') }} Todos los derechos reservados.</p>
+                <!-- Sección 1: Información de la empresa -->
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="text-danger">{{ config('app.name', 'Mi E-commerce') }}</h5>
+                    <p>&copy; {{ date('Y') }} Todos los derechos reservados.</p>
+                    <p>Comprometidos con la calidad y tu satisfacción.</p>
                 </div>
-                <div class="col-md-4 text-center">
-                    <h5>Enlaces útiles</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('info.faq') }}">Preguntas Frecuentes</a></li>
-                        <li><a href="{{ route('info.security-policy') }}">Política de Privacidad</a></li>
-                        <li><a href="{{ route('info.service-terms') }}">Términos de Servicio</a></li>
-                    </ul>
-                </div>
+                <div class="col"></div>
+                <!-- Sección 3: Redes Sociales -->
                 <div class="col-md-4 text-center text-md-right">
-                    <h5>Síguenos</h5>
-                    <a href="https://www.facebook.com" class="text-dark mr-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" class="text-dark mr-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
+                    <h5 class="text-danger">Síguenos</h5>
+                    <a href="https://www.facebook.com/share/1AxKmnJtvF/" class="text-white" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+                    
+                    <a href="https://www.instagram.com/csr.paraguay/" class="text-white" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
                 </div>
+            </div>
+            <!-- Sección de Derechos -->
+            <div class="text-center mt-4">
+                <small>&copy; {{ date('Y') }} {{ config('app.name', 'Mi E-commerce') }}. Todos los derechos
+                    reservados.</small>
+            </div>
+            <!-- Sección: Desarrollado por GOAL -->
+            <div class="text-center mt-3 text-white">
+                <small>Desarrollado por <span class="text-warning">GOAL</span></small>
             </div>
         </div>
     </footer>

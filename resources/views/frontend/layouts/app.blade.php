@@ -148,7 +148,7 @@
 
     <!-- Contenido -->
     <main class="py-4">
-        
+
         @yield('content')
     </main>
 
@@ -164,24 +164,17 @@
                 </div>
                 <div class="col"></div>
                 <!-- Sección 3: Redes Sociales -->
-                <div class="col-md-4 text-md-right text-center">
+                <div class="col-md-4 text-center text-md-right">
                     <h5 class="text-danger">Síguenos</h5>
-                    <div class="social-icons mt-2">
-                        <a href="https://www.facebook.com/profile.php?id=100068515622233" target="_blank" class="text-white mx-2">
-                            <i class="fab fa-facebook-f fa-lg"></i>
-                        </a>
-                        <a href="https://www.instagram.com/csr.paraguay/" class="text-white mx-2" target="_blank">
-                            <i class="fab fa-instagram fa-lg"></i>
-                        </a>
-                        <a href="https://twitter.com" class="text-white mx-2" target="_blank">
-                            <i class="fab fa-twitter fa-lg"></i>
-                        </a>
-                    </div>
+                    <a href="https://www.facebook.com/share/1AxKmnJtvF/" class="text-white" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+                    
+                    <a href="https://www.instagram.com/csr.paraguay/" class="text-white" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
                 </div>
             </div>
             <!-- Sección de Derechos -->
             <div class="text-center mt-4">
-                <small>&copy; {{ date('Y') }} {{ config('app.name', 'Mi E-commerce') }}. Todos los derechos reservados.</small>
+                <small>&copy; {{ date('Y') }} {{ config('app.name', 'Mi E-commerce') }}. Todos los derechos
+                    reservados.</small>
             </div>
             <!-- Sección: Desarrollado por GOAL -->
             <div class="text-center mt-3 text-white">
@@ -189,7 +182,7 @@
             </div>
         </div>
     </footer>
-    
+
 
 
     <!-- Modal del carrito -->
@@ -303,7 +296,7 @@
                     if (data.length === 0) {
                         cartItems.append(
                             '<li class="list-group-item text-center">No hay productos en el carrito</li>'
-                            );
+                        );
                     }
                     data.forEach(function(item) {
                         cartItems.append(`
