@@ -190,6 +190,21 @@ class ProductCrudController extends CrudController
                     'label' => 'Precio',
                 ],
                 [
+                    'name' => 'price_6_fees',
+                    'type' => 'number',
+                    'label' => 'Precio en 6 cuotas',
+                ],
+                [
+                    'name' => 'price_12_fees',
+                    'type' => 'number',
+                    'label' => 'Precio en 12 cuotas',
+                ],
+                [
+                    'name' => 'price_18_fees',
+                    'type' => 'number',
+                    'label' => 'Precio en 18 cuotas',
+                ],
+                [
                     'name' => 'is_on_sale',
                     'type' => 'boolean',
                     'label' => 'En oferta',
@@ -201,6 +216,7 @@ class ProductCrudController extends CrudController
                     'label' => 'Precio de oferta',
 
                 ],
+
                 [
                     'name' => 'sale_start',
                     'type' => 'datetime',

@@ -5,6 +5,9 @@
 
 @section('content')
 <div class="container mt-5">
+    @php
+        $feesPrices = \App\Helpers\Helper::getFeesPrices($product->id);
+    @endphp
     <div class="row">
         <!-- Columna de imágenes del producto -->
         <div class="col-md-5">
@@ -41,6 +44,12 @@
             @else
                 <p class="h4 text-dark">Gs. {{ \App\Helpers\Helper::formatPrice($product->price) }}</p>
             @endif
+            <hr>
+            <p class="lead">Precios a cuota:</p>
+                @foreach ($feesPrices as $fee => $price)
+                    <p class="h5 text-dark">{{ $fee }} de Gs. {{ \App\Helpers\Helper::formatPrice($price) }}</p>
+                @endforeach
+            <hr>
             <p class="lead">Detalles del producto:</p>
             <p class="lead">{{ $product->description }}</p>
             @if(isset($product->stock->quantity) && $product->stock->quantity > 0)

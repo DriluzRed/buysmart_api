@@ -31,6 +31,9 @@ class Product extends Model
         'sale_end',
         'banner_image',
         'on_slider',
+        'price_6_fees',
+        'price_12_fees',
+        'price_18_fees',
     ];
 
     public function setMainImageAttribute($value)
@@ -138,5 +141,7 @@ class Product extends Model
         });
         return $banners->isEmpty() ? collect() : $banners;
     }
+
+    
     
 }

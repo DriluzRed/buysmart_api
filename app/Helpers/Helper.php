@@ -6,7 +6,7 @@ use App\Models\Department;
 use App\Models\Neighborhood;
 use App\Models\PaymentMethod;
 use App\Models\Setting;
-
+use App\Models\Product;
 class Helper
 {
     const app = 'BuySmart';
@@ -113,6 +113,24 @@ class Helper
     public static function sendCartViaWhatsApp($data)
     {
         
+    }
+
+    public static function getFeesPrices($id)
+    {
+        $fees = Product::where('id', $id)->first();
+        $prices = [];
+        if(isset($fees->price_6_fees)){
+            $prices['En 6 cuotas'] = $fees->price_6_fees;
+        }
+        if(isset($fees->price_12_fees)){
+            $prices['En 12 cuotas'] = $fees->price_12_fees;
+        }
+
+        if(isset($fees->price_18_fees)){
+            $prices['En 18 cuotas'] = $fees->price_18_fees;
+        }
+
+        return $prices;
     }
     
 }
